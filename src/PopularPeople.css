@@ -1,0 +1,20 @@
+.popular-people-list {
+  margin: 1.5rem 0;
+}
+
+.popular-people-list img {
+  border-radius: 4px;
+  width: 120px;
+}
+
+.people-name {
+  font-weight: 600;
+  font-size: 1rem;
+  margin-block: 0.3rem 0.5rem;
+  padding: 0 0.3rem;
+}
+
+.popular-people-list .slider-item {
+  background-color: #333333;
+  border-radius: 4px;
+}

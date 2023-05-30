@@ -1,0 +1,123 @@
+:root {
+  /* Text colors */
+  --text-primary: #ffffff;
+  --text-secondary: #cccccc;
+  --text-accent: #ff9800;
+  --text-disabled: #777777;
+
+  /* Background colors */
+  --bg-primary: #111111;
+  --bg-secondary: #222222;
+  --bg-accent: #333333;
+
+  /* Hover colors */
+  --hover-primary: #333333;
+  --hover-secondary: #444444;
+  --hover-accent: #555555;
+}
+
+.nav-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-block: 1rem;
+  width: 100%;
+  position: relative;
+}
+
+ul {
+  list-style: none;
+  display: flex;
+  justify-content: center;
+}
+
+li {
+  margin-left: 1rem;
+}
+
+a {
+  text-decoration: none;
+  font-weight: bold;
+  color: var(--text-primary);
+}
+
+.nav-links {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.logo {
+  font-size: 30px;
+  font-weight: bold;
+}
+
+.logo span {
+  color: #c790d8;
+}
+
+.nav-link:hover {
+  color: #ffcc00;
+  /* Add any other styles you want for the hover effect */
+}
+
+.menu-toggle {
+  display: none;
+}
+
+.nav-item {
+  text-transform: uppercase;
+  padding: 1rem 0;
+  border-bottom: 1px solid var(--bg-primary);
+}
+
+.nav-item:last-child {
+  border-bottom: none;
+}
+
+.close-icon {
+  display: none;
+}
+
+@media screen and (max-width: 600px) {
+  .menu-toggle {
+    display: flex;
+    cursor: pointer;
+  }
+
+  .close-icon {
+    display: block;
+    position: absolute;
+    top: 2rem;
+    right: 2rem;
+    cursor: pointer;
+    color: var(--text-primary);
+  }
+
+  .sidebar {
+    display: none;
+    position: fixed;
+    right: 0;
+    top: 0;
+    height: 100vh;
+    background-color: var(--bg-secondary);
+    transition: transform 0.3s ease-in-out;
+    overflow-x: hidden;
+    z-index: 1000;
+    transform: translateX(100%);
+    width: 50%;
+  }
+
+  .sidebar ul {
+    display: flex;
+    flex-direction: column;
+    justify-content: left;
+    align-items: flex-start;
+    padding: 5rem 2rem;
+  }
+
+  .open .sidebar {
+    display: block;
+    transform: translateX(0%);
+  }
+}

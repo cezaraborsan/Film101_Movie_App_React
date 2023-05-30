@@ -1,0 +1,145 @@
+:root {
+  /* Text colors */
+  --text-primary: #ffffff;
+  --text-secondary: #cccccc;
+  --text-accent: #ff9800;
+  --text-disabled: #777777;
+
+  /* Background colors */
+  --bg-primary: #111111;
+  --bg-secondary: #222222;
+  --bg-accent: #333333;
+
+  /* Hover colors */
+  --hover-primary: #333333;
+  --hover-secondary: #444444;
+  --hover-accent: #555555;
+}
+
+.movie-details {
+  padding: 20px;
+}
+
+.movie-title {
+  font-size: 24px;
+  font-weight: bold;
+  text-align: center;
+}
+
+.minutes {
+  font-size: 14px;
+  text-align: center;
+}
+
+.poster-container {
+  display: flex;
+  align-items: self-start;
+  width: 80%;
+  gap: 2rem;
+  margin: 20px 0;
+}
+
+.poster-image {
+  display: block;
+  border: 2px solid #333;
+  border-radius: 5px;
+  max-width: 300px;
+  width: 100%;
+}
+
+.summary {
+  margin-bottom: 20px;
+}
+
+.summary .rating,
+.release-date {
+  font-size: 16px;
+  border: none;
+  padding: 0;
+  margin-block: 0.8rem;
+}
+
+.summary span {
+  font-weight: bold;
+  font-size: 1.1rem;
+}
+
+.cast-heading {
+  font-size: 20px;
+  font-weight: bold;
+  margin-top: 20px;
+}
+
+.actor-container {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  margin-bottom: 10px;
+  width: fit-content;
+}
+
+.cast-image {
+  width: 120px;
+  border-radius: 5px;
+  object-fit: cover;
+  margin-right: 10px;
+}
+
+.cast-name {
+  font-weight: bold;
+  font-size: 1rem;
+  margin: 0.2rem 1rem 0 0;
+  max-width: 90px;
+}
+
+.cast-character {
+  font-size: 0.7rem;
+  margin: 0.2rem 0;
+}
+
+.cast-list {
+  justify-content: flex-start;
+  margin: 1rem 0;
+  width: 100%;
+  gap: 1.5rem;
+  overflow-x: auto;
+}
+.cast-list li {
+  margin: 0 10px 0 0;
+  white-space: nowrap;
+}
+
+.genre {
+  margin-right: 0.5rem;
+  font-size: 1.1rem;
+  border: 1px solid var(--text-secondary);
+  padding: 0.3rem 0.5rem;
+  border-radius: 5px;
+}
+
+@media screen and (max-width: 1200px) {
+  .poster-container {
+    width: 100%;
+  }
+}
+
+@media (max-width: 800px) {
+  .poster-container {
+    flex-direction: column;
+  }
+}
+
+@media screen and (max-width: 400px) {
+  .movie-title {
+    font-size: 20px;
+  }
+
+  .cast-list {
+    justify-content: center;
+    gap: 0.5rem;
+  }
+
+  .cast-list li {
+    margin: 0 0.5rem 0.5rem 0;
+  }
+}
