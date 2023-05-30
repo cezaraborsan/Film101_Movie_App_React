@@ -137,7 +137,7 @@ h2:before {
 .genres {
   display: flex;
   flex-wrap: wrap;
-  justify-content: start;
+  justify-content: flex-start;
   row-gap: 1rem;
 }
 
