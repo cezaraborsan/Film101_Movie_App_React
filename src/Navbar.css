@@ -67,8 +67,6 @@ a {
 
 .nav-item {
   text-transform: uppercase;
-  padding: 1rem 0;
-  border-bottom: 1px solid var(--bg-primary);
 }
 
 .nav-item:last-child {
@@ -119,5 +117,9 @@ a {
   .open .sidebar {
     display: block;
     transform: translateX(0%);
+  }
+
+  .nav-item {
+    padding: 1rem 0;
   }
 }
