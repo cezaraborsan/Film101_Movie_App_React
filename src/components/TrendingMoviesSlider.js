@@ -13,7 +13,7 @@ const TrendingMoviesSlider = ({ movies }) => {
         <button {...props} className="slick-next"></button>
     );
 
-    const FallbackImage = "../image_replacement.png";
+    // const FallbackImage = "../image_replacement.png";
 
     const settings = {
         dots: false,

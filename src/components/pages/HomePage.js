@@ -7,7 +7,7 @@ import TrendingMoviesSlider from '../TrendingMoviesSlider';
 import TrendingTVShowsSlider from '../TrendingTVShowsSlider';
 import PopularPeopleSlider from '../PopularPeopleSlider';
 import MovieBlog from '../MovieBlog';
-import GenreSection from '../GenreHomePageSection';
+// import GenreSection from '../GenreHomePageSection';
 import MovieTrailers from '../MovieTrailers';
 import Loader from '../Loader';
 

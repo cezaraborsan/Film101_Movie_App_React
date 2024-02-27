@@ -8,7 +8,7 @@ import MovieCard from './MovieCard';
 
 const MovieSlider = ({ title, movies }) => {
 
-    const FallbackImage = "../image_replacement.png";
+    // const FallbackImage = "../image_replacement.png";
 
     const settings = {
         dots: false,

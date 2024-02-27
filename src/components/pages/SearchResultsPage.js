@@ -8,7 +8,7 @@ const SearchResultPage = () => {
   const location = useLocation();
   const [searchResults, setSearchResults] = useState([]);
   const [loading, setLoading] = useState(true); // Add loading state
-  const imageReplacement = "../image_replacement.png";
+  // const imageReplacement = "../image_replacement.png";
 
   useEffect(() => {
     const fetchedResults = location.state?.searchResults || [];
@@ -28,18 +28,14 @@ const SearchResultPage = () => {
             searchResults.map((item) => {
               const {
                 id,
-                title,
-                name,
-                poster_path,
-                vote_average,
                 media_type,
               } = item;
 
               const linkUrl =
                 media_type === "movie" ? `/movies/${id}` : `/tvshows/${id}`;
-              const posterPath = poster_path
-                ? `https://image.tmdb.org/t/p/w500${poster_path}`
-                : imageReplacement;
+              // const posterPath = poster_path
+              //   ? `https://image.tmdb.org/t/p/w500${poster_path}`
+              //   : imageReplacement;
 
               return (
                 <div key={id} className="movie-card">
@@ -59,12 +55,12 @@ const SearchResultPage = () => {
   );
 };
 
-// Helper function to determine rating color
-const getRatingColor = (rating) => {
-  if (rating < 5) return "red";
-  if (rating < 7.5) return "yellow";
-  if (rating >= 7.5) return "green";
-  return "gray";
-};
+// // Helper function to determine rating color
+// const getRatingColor = (rating) => {
+//   if (rating < 5) return "red";
+//   if (rating < 7.5) return "yellow";
+//   if (rating >= 7.5) return "green";
+//   return "gray";
+// };
 
 export default SearchResultPage;

@@ -1,10 +1,9 @@
 import React from "react";
-import { Link } from "react-router-dom";
 import "../MovieCard.css";
 
 const MovieCard = ({ movie, mediaType, show }) => {
     const {
-        id,
+
         title,
         name,
         poster_path,

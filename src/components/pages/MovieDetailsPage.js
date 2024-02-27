@@ -48,7 +48,7 @@ const MovieDetailsPage = () => {
     return <p>Loading...</p>;
   }
 
-  const { title, release_date, vote_average, overview, poster_path, backdrop_path, credits, runtime, first_air_date } = movie;
+  const { title, release_date, vote_average, overview, poster_path, credits, runtime, first_air_date } = movie;
 
   // Extracting the year from the release date
   const year = release_date ? new Date(release_date).getFullYear() : '';

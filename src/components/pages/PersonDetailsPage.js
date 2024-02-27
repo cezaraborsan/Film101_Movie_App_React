@@ -10,7 +10,7 @@ const PersonDetailsPage = () => {
     const [personDetails, setPersonDetails] = useState(null);
     const [showFullBiography, setShowFullBiography] = useState(false);
 
-    const FallbackImage = "../image_replacement.png";
+    // const FallbackImage = "../image_replacement.png";
 
 
     useEffect(() => {
