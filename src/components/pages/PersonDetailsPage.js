@@ -1,7 +1,9 @@
-// PersonDetailsPage.js
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { Link, useParams } from 'react-router-dom';
+import Slider from 'react-slick';
+import 'slick-carousel/slick/slick.css';
+import 'slick-carousel/slick/slick-theme.css';
 import '../../PersonDetailsPage.css';
 import MovieCard from '../MovieCard';
 
@@ -9,9 +11,6 @@ const PersonDetailsPage = () => {
     const { personId } = useParams();
     const [personDetails, setPersonDetails] = useState(null);
     const [showFullBiography, setShowFullBiography] = useState(false);
-
-    // const FallbackImage = "../image_replacement.png";
-
 
     useEffect(() => {
         const fetchPersonDetails = async () => {
@@ -29,6 +28,45 @@ const PersonDetailsPage = () => {
 
     const toggleBiography = () => {
         setShowFullBiography(!showFullBiography);
+    };
+
+    const sliderSettings = {
+        dots: true,
+        infinite: false,
+        speed: 500,
+        slidesToShow: 4,
+        slidesToScroll: 4,
+        initialSlide: 0,
+        centerPadding: '10px',
+        responsive: [
+            {
+                breakpoint: 1024,
+                settings: {
+                    slidesToShow: 3,
+                    slidesToScroll: 1,
+                    infinite: true,
+                    dots: true,
+                },
+            },
+            {
+                breakpoint: 600,
+                settings: {
+                    slidesToShow: 2,
+                    slidesToScroll: 1,
+                    dots: false
+                },
+            },
+            {
+                breakpoint: 480,
+                settings: {
+                    slidesToShow: 2,
+                    slidesToScroll: 1,
+                    dots: false
+                },
+
+            },
+        ],
+
     };
 
     return (
@@ -50,13 +88,13 @@ const PersonDetailsPage = () => {
                     {personDetails.movie_credits && personDetails.movie_credits.cast && (
                         <div className="person-movies">
                             <h3>Known for:</h3>
-                            <ul className="movies-list">
-                                {personDetails.movie_credits.cast.slice(0, 10).map((movie) => (
-                                    <Link to={`/movie/${movie.id}`} className='known-for-movie-card'>
+                            <Slider {...sliderSettings}>
+                                {personDetails.movie_credits.cast.slice(0, 15).map((movie) => (
+                                    <Link to={`/movie/${movie.id}`} className='known-for-movie-card' key={movie.id}>
                                         <MovieCard movie={movie} />
                                     </Link>
                                 ))}
-                            </ul>
+                            </Slider>
                         </div>
                     )}
                 </>

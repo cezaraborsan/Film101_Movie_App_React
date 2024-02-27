@@ -2,14 +2,15 @@
 
 .movie-blog-wrapper {
     margin-block: 3rem;
-    padding-inline: 20px;
+    padding-inline: 0px;
 }
 
 .movie-blog {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-    gap: 20px;
+    gap: 10px;
     text-align: left;
+
 }
 
 .blog-post {
@@ -19,10 +20,13 @@
     text-align: left;
     height: fit-content;
     overflow: hidden;
+    height: 450px;
+
 }
 
 .blog-post-content {
     padding: 10px;
+    padding-bottom: 1rem;
 }
 
 .blog-post-image {

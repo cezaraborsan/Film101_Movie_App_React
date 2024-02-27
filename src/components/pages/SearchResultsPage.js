@@ -4,16 +4,17 @@ import "../../MovieSearch.css";
 import Loader from '../Loader'; // Import the Loader component
 import MovieCard from '../MovieCard';
 
+// ... (other imports)
+
 const SearchResultPage = () => {
   const location = useLocation();
   const [searchResults, setSearchResults] = useState([]);
-  const [loading, setLoading] = useState(true); // Add loading state
-  // const imageReplacement = "../image_replacement.png";
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const fetchedResults = location.state?.searchResults || [];
     setSearchResults(fetchedResults);
-    setLoading(false); // Set loading to false when data is fetched
+    setLoading(false);
   }, [location.state]);
 
   return (
@@ -26,16 +27,10 @@ const SearchResultPage = () => {
         <div className="movie-card-container">
           {searchResults.length > 0 ? (
             searchResults.map((item) => {
-              const {
-                id,
-                media_type,
-              } = item;
+              const { id, media_type } = item;
 
-              const linkUrl =
-                media_type === "movie" ? `/movies/${id}` : `/tvshows/${id}`;
-              // const posterPath = poster_path
-              //   ? `https://image.tmdb.org/t/p/w500${poster_path}`
-              //   : imageReplacement;
+              // Dynamically generate the link URL based on the media type
+              const linkUrl = `/${media_type}s/${id}`;
 
               return (
                 <div key={id} className="movie-card">
@@ -54,13 +49,5 @@ const SearchResultPage = () => {
     </div>
   );
 };
-
-// // Helper function to determine rating color
-// const getRatingColor = (rating) => {
-//   if (rating < 5) return "red";
-//   if (rating < 7.5) return "yellow";
-//   if (rating >= 7.5) return "green";
-//   return "gray";
-// };
 
 export default SearchResultPage;

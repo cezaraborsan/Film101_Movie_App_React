@@ -3,7 +3,7 @@
 .movie-details {
   max-width: 1100px;
   margin: 0 auto;
-  padding-block: 4rem;
+  padding-block: 4rem 0;
 }
 
 .poster {
@@ -139,7 +139,6 @@ iframe {
 
   .poster-wrapper {
     display: flex;
-
   }
 
   iframe {
@@ -148,11 +147,23 @@ iframe {
   }
 }
 
-@media screen and (max-width: 768px) {}
+@media screen and (max-width: 600px) {
+
+  .poster-wrapper {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .poster {
+    width: 100%;
+  }
+}
 
 @media screen and (max-width: 470px) {
   .hero-description {
     max-width: 100%;
   }
+
+
 
 }

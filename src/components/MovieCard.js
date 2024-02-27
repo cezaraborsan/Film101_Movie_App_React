@@ -3,7 +3,6 @@ import "../MovieCard.css";
 
 const MovieCard = ({ movie, mediaType, show }) => {
     const {
-
         title,
         name,
         poster_path,
