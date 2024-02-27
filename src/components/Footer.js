@@ -1,4 +1,5 @@
 import React from "react";
+import "../footer.css"
 
 const Footer = () => {
   return (
@@ -13,11 +14,11 @@ const Footer = () => {
             <p>Discover a world of entertainment with Film101. Your go-to destination for the latest movies and TV shows.</p>
           </div>
 
-          <div className="footer-section">
+          {/* <div className="footer-section">
             <h4>Contact</h4>
             <p>Email: info@film101.com</p>
             <p>Phone: +1 (123) 456-7890</p>
-          </div>
+          </div> */}
 
           <div className="footer-section">
 
@@ -38,7 +39,7 @@ const Footer = () => {
         </div>
 
         <div className="footer-bottom">
-          <p>&copy; 2023 Film101. All rights reserved. | Designed by YourName</p>
+          <p>&copy; 2023 FilmSphere. All rights reserved.</p>
         </div>
       </footer>
     </>
