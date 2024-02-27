@@ -1,159 +1,61 @@
-import React, { useEffect, useState, useRef } from "react";
-import axios from "axios";
-import MovieCard from "../MovieCard";
-import MovieList from "../MovieList";
-import PopularPeople from "../PopularPeople";
-import TVShowsList from "../TVShowsList";
-import Loader from "../Loader";
-
-const apiKey = process.env.REACT_APP_API_KEY;
+// HomePage.js
+import React, { useState, useEffect } from 'react';
+import axios from 'axios';
+import '../../HomePage.css';
+import UpcomingMoviesSlider from '../UpcomingMoviesSlider';
+import TrendingMoviesSlider from '../TrendingMoviesSlider';
+import TrendingTVShowsSlider from '../TrendingTVShowsSlider';
+import PopularPeopleSlider from '../PopularPeopleSlider';
+import MovieBlog from '../MovieBlog';
+import GenreSection from '../GenreHomePageSection';
+import MovieTrailers from '../MovieTrailers';
+import Loader from '../Loader';
 
 const HomePage = () => {
-  const [trendingMovies, setTrendingMovies] = useState([]);
-  const [trendingTVShows, setTrendingTVShows] = useState([]);
-  const [topMovies, setTopMovies] = useState([]);
-  const [topTVShows, setTopTVShows] = useState([]);
   const [upcomingMovies, setUpcomingMovies] = useState([]);
-  const [onAir, setOnAir] = useState([]);
+  const [movies, setMovies] = useState([]);
+  const [popularTVShows, setPopularTVShows] = useState([]);
+  const [popularPeople, setPopularPeople] = useState([]);
   const [loading, setLoading] = useState(true);
-  const sliderRef = useRef(null);
+  const apiKey = process.env.REACT_APP_API_KEY;
 
   useEffect(() => {
-    // Simulating a delay to show the loader
-    setTimeout(() => {
-      setLoading(false);
-    }, 3000);
-  }, []);
-
-  useEffect(() => {
-    const fetchData = async (url, setData) => {
+    const fetchData = async () => {
       try {
-        const response = await axios.get(url, {
-          params: {
-            api_key: apiKey,
-            language: "en-US",
-            page: 1,
-          },
-        });
+        const [upcomingResponse, moviesResponse, tvShowsResponse, peopleResponse] = await Promise.all([
+          axios.get(`https://api.themoviedb.org/3/movie/upcoming?api_key=${apiKey}&language=en-US&page=1`),
+          axios.get('https://api.themoviedb.org/3/movie/popular', { params: { api_key: apiKey } }),
+          axios.get('https://api.themoviedb.org/3/trending/tv/week', { params: { api_key: apiKey } }),
+          axios.get('https://api.themoviedb.org/3/person/popular', { params: { api_key: apiKey } }),
+        ]);
 
-        const data = response.data.results;
-        setData(data);
+        setUpcomingMovies(upcomingResponse.data.results);
+        setMovies(moviesResponse.data.results);
+        setPopularTVShows(tvShowsResponse.data.results);
+        setPopularPeople(peopleResponse.data.results);
       } catch (error) {
-        console.error("Error fetching data:", error);
+        console.error('Error fetching data:', error);
+      } finally {
+        setLoading(false);
       }
     };
 
-    fetchData(
-      "https://api.themoviedb.org/3/trending/movie/week",
-      setTrendingMovies
-    );
-    fetchData("https://api.themoviedb.org/3/movie/top_rated", (movies) => {
-      const topMovies = movies.slice(0, 10);
-      setTopMovies(topMovies);
-    });
-    fetchData(
-      "https://api.themoviedb.org/3/trending/tv/week",
-      setTrendingTVShows
-    );
-    fetchData("https://api.themoviedb.org/3/tv/top_rated", (tvShows) => {
-      const topTvShows = tvShows.slice(0, 10);
-      setTopTVShows(topTvShows);
-    });
-    fetchData("https://api.themoviedb.org/3/movie/upcoming", (movies) => {
-      const upcoming = movies.slice(0, 10);
-      setUpcomingMovies(upcoming);
-    });
-    fetchData("https://api.themoviedb.org/3/tv/on_the_air", (onAir) => {
-      const tvOnAir = onAir.slice(0, 10);
-      setOnAir(tvOnAir);
-    });
-  }, []);
+    fetchData();
+  }, [apiKey]);
+
+  if (loading) {
+    return <Loader />;
+  }
 
   return (
-    <div>
-      {loading ? (
-        <Loader />
-      ) : (
-        <div className="home-page-layout">
-          <div>
-            <h2 className="section-title">This Week's Trending Movies</h2>
-            {trendingMovies.length > 0 ? (
-              <div className="manual-slider">
-                <div className="slider-content" ref={sliderRef}>
-                  {trendingMovies.map((movie) => (
-                    <div key={movie.id} className="slider-item">
-                      <MovieCard movie={movie} />
-                    </div>
-                  ))}
-                </div>
-              </div>
-            ) : (
-              <p>Loading trending movies...</p>
-            )}
-          </div>
-          <div>
-            <h2 className="section-title">This Week's Trending TV Shows</h2>
-            {trendingTVShows.length > 0 ? (
-              <div className="manual-slider">
-                <div className="slider-content" ref={sliderRef}>
-                  {trendingTVShows.map((tvShow) => (
-                    <div key={tvShow.id} className="slider-item">
-                      <MovieCard movie={tvShow} isTVShow={true} />
-                    </div>
-                  ))}
-                </div>
-              </div>
-            ) : (
-              <p>Loading trending movies...</p>
-            )}
-          </div>
-          <div className="top-lists">
-            <div>
-              <h2 className="section-title">Top Rated Movies</h2>
-              {topMovies.length > 0 ? (
-                <MovieList movies={topMovies} />
-              ) : (
-                <p>Loading top rated movies...</p>
-              )}
-            </div>
-            <div>
-              <h2 className="section-title">Top Rated TV Shows</h2>
-              {topTVShows.length > 0 ? (
-                <TVShowsList tvshows={topTVShows} />
-              ) : (
-                <p>Loading top rated TV shows...</p>
-              )}
-            </div>
-            <div>
-              <h2 className="section-title">TV Shows On Air</h2>
-              {onAir.length > 0 ? (
-                <TVShowsList tvshows={onAir} />
-              ) : (
-                <p>Loading TV shows on air...</p>
-              )}
-            </div>
-          </div>
-          <div>
-            <PopularPeople />
-          </div>
-          <div>
-            <h2 className="section-title">Upcoming Movies</h2>
-            {upcomingMovies.length > 0 ? (
-              <div className="manual-slider">
-                <div className="slider-content" ref={sliderRef}>
-                  {upcomingMovies.map((movie) => (
-                    <div key={movie.id} className="slider-item">
-                      <MovieCard movie={movie} />
-                    </div>
-                  ))}
-                </div>
-              </div>
-            ) : (
-              <p>Loading trending movies...</p>
-            )}
-          </div>
-        </div>
-      )}
+    <div className="home-page">
+      <UpcomingMoviesSlider movies={upcomingMovies} />
+      <TrendingMoviesSlider movies={movies} />
+      <TrendingTVShowsSlider tvShows={popularTVShows} />
+      {/* <GenreSection /> */}
+      <PopularPeopleSlider people={popularPeople} />
+      <MovieBlog movies={upcomingMovies} numberOfMovies={8} />
+      <MovieTrailers apiKey={apiKey} />
     </div>
   );
 };

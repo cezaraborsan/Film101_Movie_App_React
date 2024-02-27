@@ -1,77 +1,125 @@
-import React, { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
-import "../Navbar.css";
-import MovieSearch from "./MovieSearch";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faBars, faTimes } from "@fortawesome/free-solid-svg-icons";
+import React, { useState, useRef, useEffect } from 'react';
+import axios from 'axios';
+import { useNavigate, Link } from 'react-router-dom';
+import '../Navbar.css';
 
-function Navbar() {
-  const [sidebarOpen, setSidebarOpen] = useState(false);
-
-  const toggleSidebar = () => {
-    setSidebarOpen(!sidebarOpen);
-  };
-
-  const closeSidebar = () => {
-    setSidebarOpen(false);
-  };
+const Navbar = () => {
+  const [isNavOpen, setNavOpen] = useState(false);
+  const [isSearchOpen, setSearchOpen] = useState(false);
+  const [searchQuery, setSearchQuery] = useState('');
+  const navigate = useNavigate();
+  const searchIconRef = useRef(null);
+  const searchInputRef = useRef(null);
 
   useEffect(() => {
-    const handleResize = () => {
-      if (window.innerWidth > 1200) {
-        setSidebarOpen(false);
+    if (isSearchOpen && searchInputRef.current) {
+      searchInputRef.current.focus();
+    }
+  }, [isSearchOpen]);
+
+  const toggleNav = () => {
+    setNavOpen(!isNavOpen);
+    setSearchOpen(false);
+  };
+
+  const toggleSearch = () => {
+    setSearchOpen(!isSearchOpen);
+    setNavOpen(false);
+  };
+
+  const closeNav = () => {
+    setNavOpen(false);
+  };
+
+  const handleSearchInputChange = (event) => {
+    setSearchQuery(event.target.value);
+  };
+
+  const handleSearchSubmit = async (event) => {
+    event.preventDefault();
+
+    if (searchQuery.trim() === '') {
+      return;
+    }
+
+    try {
+      const apiKey = process.env.REACT_APP_API_KEY;
+
+      const response = await axios.get(
+        `https://api.themoviedb.org/3/search/multi?api_key=${apiKey}&language=en-US&query=${searchQuery}&page=1`
+      );
+
+      const data = response.data;
+      const searchItems = data.results.slice(0, 25);
+
+      setSearchQuery('');
+
+      if (searchItems.length > 0) {
+        navigate('/search', { state: { searchResults: searchItems } });
+      } else {
+        console.log('No search results found.');
       }
-    };
+    } catch (error) {
+      console.error('Error searching movies and TV shows:', error);
+    }
+  };
 
-    window.addEventListener("resize", handleResize);
-
-    return () => {
-      window.removeEventListener("resize", handleResize);
-    };
-  }, []);
+  const handleLinkClick = () => {
+    // Close the navigation menu on link click for small screens
+    if (window.innerWidth <= 768) {
+      closeNav();
+    }
+  };
 
   return (
-    <nav>
-      <div className={`nav-container ${sidebarOpen ? "open" : ""}`}>
-        <Link to="/">
-          <h1 className="logo">
-            Film<span>101</span>
-          </h1>
+    <nav className='navbar-wrapper'>
+      <div className={`nav ${isNavOpen ? 'openNav' : ''} ${isSearchOpen ? 'openSearch' : ''}`}>
+        <i className="uil uil-bars navOpenBtn" onClick={toggleNav}></i>
+        <Link to="/" className="logo">
+          FilmSphere
         </Link>
 
-        <div className={`sidebar ${sidebarOpen ? "open" : ""}`}>
-          <ul className="nav-links">
-            <li className="close-icon" onClick={closeSidebar}>
-              <FontAwesomeIcon icon={faTimes} />
-            </li>
-            <li className="nav-item">
-              <Link to="/" className="nav-link" onClick={closeSidebar}>
-                Home
-              </Link>
-            </li>
-            <li className="nav-item">
-              <Link to="/genres" className="nav-link" onClick={closeSidebar}>
-                Movies
-              </Link>
-            </li>
-            <li className="nav-item">
-              <Link
-                to="/random-movie"
-                className="nav-link"
-                onClick={closeSidebar}
-              >
-                Random Movie
-              </Link>
-            </li>
-          </ul>
-        </div>
-        <div className="menu-toggle" onClick={toggleSidebar}>
-          <FontAwesomeIcon icon={faBars} />
+        <ul className="nav-links">
+          <i className="uil uil-times navCloseBtn" onClick={closeNav}></i>
+          <li>
+            <Link to="/" className="nav-link" onClick={handleLinkClick}>
+              Home
+            </Link>
+          </li>
+          <li>
+            <Link to="/movies" className="nav-link" onClick={handleLinkClick}>
+              Movies
+            </Link>
+          </li>
+          <li>
+            <Link to="/tvshows" className="nav-link" onClick={handleLinkClick}>
+              TV Shows
+            </Link>
+          </li>
+        </ul>
+
+        <i
+          className={`uil uil-search search-icon ${isSearchOpen ? 'uil-times' : 'uil-search'}`}
+          id="searchIcon"
+          onClick={toggleSearch}
+          ref={searchIconRef}
+          tabIndex="0" // Ensure the element is focusable
+        ></i>
+        <div className={`search-box ${isSearchOpen ? 'openSearch' : ''}`}>
+          <form onSubmit={handleSearchSubmit}>
+            <input
+              type="text"
+              placeholder="Search..."
+              value={searchQuery}
+              onChange={handleSearchInputChange}
+              className={isSearchOpen ? 'active' : ''}
+              ref={searchInputRef}
+            />
+          </form>
         </div>
       </div>
-      <MovieSearch />
     </nav>
   );
-}
+};
 
 export default Navbar;

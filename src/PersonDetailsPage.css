@@ -1,0 +1,90 @@
+/* PersonDetailsPage.css */
+
+.person-details {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 20px;
+    padding-top: 6rem;
+}
+
+.person-info {
+    margin-bottom: 20px;
+}
+
+.person-overview {
+    display: flex;
+}
+
+.person-info img {
+    width: 300px;
+    height: auto;
+    border-radius: 8px;
+    margin-right: 20px;
+}
+
+.person-bio {
+    margin-top: 10px;
+    font-size: 16px;
+    color: #555;
+    max-width: 60%;
+}
+
+.person-bio span {
+    color: rgba(0, 0, 0, 0.8);
+    font-size: 17px;
+
+}
+
+.person-movies {
+    margin-top: 20px;
+}
+
+.movies-list {
+    list-style: none;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1.5rem;
+}
+
+.known-for-movie-card {
+    border-radius: 8px;
+    overflow: hidden;
+    transition: transform 0.3s ease;
+    width: 100%;
+    max-width: 220px;
+
+}
+
+.known-for-movie-card img {
+    height: 100%;
+    object-fit: cover;
+    border-radius: 8px;
+    max-width: 290px;
+}
+
+h5 {
+    white-space: nowrap !important;
+    overflow: hidden !important;
+    text-overflow: ellipsis !important;
+}
+
+/* Responsive styles */
+@media screen and (max-width: 768px) {
+    .person-info {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .person-info img {
+        width: 100%;
+        margin-bottom: 1rem;
+    }
+
+    .movies-list {
+        justify-content: center;
+    }
+
+    .movie-card {
+        width: 120px;
+    }
+}

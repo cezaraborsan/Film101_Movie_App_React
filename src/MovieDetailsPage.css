@@ -1,145 +1,158 @@
-:root {
-  /* Text colors */
-  --text-primary: #ffffff;
-  --text-secondary: #cccccc;
-  --text-accent: #ff9800;
-  --text-disabled: #777777;
-
-  /* Background colors */
-  --bg-primary: #111111;
-  --bg-secondary: #222222;
-  --bg-accent: #333333;
-
-  /* Hover colors */
-  --hover-primary: #333333;
-  --hover-secondary: #444444;
-  --hover-accent: #555555;
-}
+/* MovieDetailsPage.css */
 
 .movie-details {
-  padding: 20px;
+  max-width: 1100px;
+  margin: 0 auto;
+  padding-block: 4rem;
 }
 
-.movie-title {
-  font-size: 24px;
-  font-weight: bold;
-  text-align: center;
+.poster {
+  width: 300px;
+  height: auto;
+  margin-right: 20px;
 }
 
-.minutes {
-  font-size: 14px;
-  text-align: center;
+.image-container {
+  display: grid;
+  grid-template-columns: 1fr 3fr;
 }
 
-.poster-container {
+.movie-info {
+  flex-grow: 1;
+}
+
+
+.title-wrapper {
   display: flex;
-  align-items: self-start;
-  width: 80%;
-  gap: 2rem;
-  margin: 20px 0;
+  align-items: center;
+  justify-content: space-between;
 }
 
-.poster-image {
-  display: block;
-  border: 2px solid #333;
-  border-radius: 5px;
-  max-width: 300px;
-  width: 100%;
+
+
+.movie-info span {
+  font-size: 1.2rem;
+  margin-right: 1rem;
+  padding-block: 0;
+
 }
 
-.summary {
-  margin-bottom: 20px;
+.rating-label {
+  float: right;
+  padding: 15px !important;
+  margin: 0 0 0 2rem !important;
+
 }
 
-.summary .rating,
-.release-date {
-  font-size: 16px;
-  border: none;
-  padding: 0;
-  margin-block: 0.8rem;
+.year-label {
+  border-right: 2px solid #333;
+  padding-right: 1rem;
+  font-weight: bold !important;
 }
 
-.summary span {
-  font-weight: bold;
-  font-size: 1.1rem;
+
+.overview-section {
+  padding-block: 1.5rem;
 }
 
-.cast-heading {
-  font-size: 20px;
-  font-weight: bold;
+.movie-details-overview {
+  padding: 1rem 0 2rem;
+}
+
+
+.movie-info p {
+  margin: 5px 0;
+  color: #555;
+  text-align: left !important;
+
+}
+
+.details-content {
   margin-top: 20px;
 }
 
-.actor-container {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  margin-bottom: 10px;
-  width: fit-content;
-}
+iframe {
+  width: 100%;
+  border: none;
+  border-radius: 8px;
 
-.cast-image {
-  width: 120px;
-  border-radius: 5px;
-  object-fit: cover;
-  margin-right: 10px;
-}
-
-.cast-name {
-  font-weight: bold;
-  font-size: 1rem;
-  margin: 0.2rem 1rem 0 0;
-  max-width: 90px;
-}
-
-.cast-character {
-  font-size: 0.7rem;
-  margin: 0.2rem 0;
 }
 
 .cast-list {
-  justify-content: flex-start;
-  margin: 1rem 0;
-  width: 100%;
-  gap: 1.5rem;
-  overflow-x: auto;
-}
-.cast-list li {
-  margin: 0 10px 0 0;
-  white-space: nowrap;
+  list-style: none;
+  padding: 1rem 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 2rem;
+  height: 100%;
 }
 
-.genre {
-  margin-right: 0.5rem;
-  font-size: 1.1rem;
-  border: 1px solid var(--text-secondary);
-  padding: 0.3rem 0.5rem;
-  border-radius: 5px;
+.cast-list a {
+  padding-block: 0.5rem;
 }
 
-@media screen and (max-width: 1200px) {
-  .poster-container {
-    width: 100%;
+.cast-list img {
+  width: 140px;
+  object-fit: cover;
+  border-radius: 4px;
+  margin-right: 10px;
+}
+
+
+.character-name {
+  margin: 0 auto !important;
+  width: max-content;
+  color: rgba(0, 0, 0, 0.6);
+}
+
+.slick-dots {}
+
+.slick-list {
+  margin-bottom: 2.5rem;
+
+}
+
+.movie-details-overview-hide {
+  display: none;
+}
+
+@media screen and (max-width: 950px) {
+  .movie-details {
+    padding-block: 6rem;
+    padding-inline: 20px;
   }
-}
 
-@media (max-width: 800px) {
-  .poster-container {
+  .image-container {
+    display: flex;
     flex-direction: column;
+    gap: 1rem;
+  }
+
+  .movie-details-overview-hide {
+    display: block;
+  }
+
+  .movie-details-title,
+  .movie-details-overview {
+    display: none;
+  }
+
+  .poster-wrapper {
+    display: flex;
+
+  }
+
+  iframe {
+    min-height: 400px;
+    height: max-content;
   }
 }
 
-@media screen and (max-width: 400px) {
-  .movie-title {
-    font-size: 20px;
+@media screen and (max-width: 768px) {}
+
+@media screen and (max-width: 470px) {
+  .hero-description {
+    max-width: 100%;
   }
 
-  .cast-list {
-    justify-content: center;
-    gap: 0.5rem;
-  }
-
-  .cast-list li {
-    margin: 0 0.5rem 0.5rem 0;
-  }
 }

@@ -1,140 +1,165 @@
-import React, { useState, useEffect } from "react";
-import { Link, useParams } from "react-router-dom";
-import axios from "axios";
-import "../../MovieDetailsPage.css";
+// TVShowDetailsPage.js
+import React, { useState, useEffect } from 'react';
+import axios from 'axios';
+import { useParams } from 'react-router-dom';
+import '../../MovieDetailsPage.css';
+import Loader from '../Loader';
+import { Link } from 'react-router-dom';
+import Slider from 'react-slick';
 
-const apiKey = process.env.REACT_APP_API_KEY;
+const TVShowDetailsPage = () => {
+  const { id } = useParams();
+  const [tvShow, setTVShow] = useState(null);
+  const [trailerKey, setTrailerKey] = useState(null);
+  const [loading, setLoading] = useState(true);
+  const apiKey = process.env.REACT_APP_API_KEY;
 
-const TvShowDetailsPage = () => {
-  const { tvShowId } = useParams();
-  const [tvShow, setTvShow] = useState(null);
-  const [cast, setCast] = useState([]);
-  const imageReplacement = "../image_replacement.png";
+  const FallbackImage = "../image_replacement.png";
 
   useEffect(() => {
-    fetchTvShowDetails();
-    fetchTvShowCredits();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+    const fetchTVShowDetails = async () => {
+      try {
+        const response = await axios.get(
+          `https://api.themoviedb.org/3/tv/${id}?api_key=${apiKey}&append_to_response=videos,credits`
+        );
+        setTVShow(response.data);
 
-  const fetchTvShowDetails = async () => {
-    try {
-      const response = await axios.get(
-        `https://api.themoviedb.org/3/tv/${tvShowId}`,
-        {
-          params: {
-            api_key: apiKey,
-          },
+        const videos = response.data.videos.results;
+        const trailer = videos.find((video) => video.type === 'Trailer');
+        if (trailer) {
+          setTrailerKey(trailer.key);
         }
-      );
+      } catch (error) {
+        console.error('Error fetching TV show details:', error);
+      } finally {
+        setLoading(false);
+      }
+    };
 
-      const tvShowData = response.data;
-      setTvShow(tvShowData);
-    } catch (error) {
-      console.error("Error fetching movie details:", error);
-    }
+    fetchTVShowDetails();
+  }, [id, apiKey]);
+
+  if (loading) {
+    return <Loader />;
+  }
+
+  if (!tvShow) {
+    return <p>Loading...</p>;
+  }
+
+  const { name, first_air_date, vote_average, overview, poster_path, credits, episode_run_time } = tvShow;
+
+  // Extracting the year from the release date
+  const year = first_air_date ? new Date(first_air_date).getFullYear() : '';
+
+  // Slick slider settings
+  const sliderSettings = {
+    dots: true,
+    infinite: false,
+    speed: 500,
+    slidesToShow: 4,
+    slidesToScroll: 4,
+    initialSlide: 0,
+    responsive: [
+      {
+        breakpoint: 1024,
+        settings: {
+          slidesToShow: 3,
+          slidesToScroll: 3,
+          infinite: true,
+          dots: true,
+        },
+      },
+      {
+        breakpoint: 600,
+        settings: {
+          slidesToShow: 2,
+          slidesToScroll: 2,
+          initialSlide: 2,
+        },
+      },
+      {
+        breakpoint: 480,
+        settings: {
+          slidesToShow: 1,
+          slidesToScroll: 1,
+        },
+      },
+    ],
   };
 
-  const fetchTvShowCredits = async () => {
-    try {
-      const response = await axios.get(
-        `https://api.themoviedb.org/3/tv/${tvShowId}/credits`,
-        {
-          params: {
-            api_key: apiKey,
-          },
-        }
-      );
+  const isReleased =
+    (first_air_date && new Date(first_air_date) <= new Date());
 
-      const castData = response.data.cast;
-      setCast(castData);
-    } catch (error) {
-      console.error("Error fetching movie credits:", error);
-    }
-  };
+  const ratingClass =
+    isReleased && vote_average
+      ? vote_average <= 5
+        ? "red"
+        : vote_average < 7.5
+          ? "yellow"
+          : "green"
+      : "gray";
+
+  const ratingText =
+    isReleased && vote_average ? vote_average.toFixed(1) : "N/A";
 
   return (
     <div className="movie-details">
-      {tvShow ? (
-        <>
-          <h2 className="movie-title">{tvShow.name}</h2>
-          <div className="genre-list">
-            {tvShow.genres.slice(0, 3).map((genre) => (
-              <span key={genre.id} className="genre">
-                {genre.name}
-              </span>
-            ))}
+      <div className="details-header">
+        <div className="movie-info">
+          <div className='title-wrapper'>
+            <h2>{`${name} (${year})`}</h2>
+            <span className={`m-card-rating rating-label ${ratingClass}`}>{ratingText}</span>
           </div>
-          <div className="poster-container">
-            <img
-              src={
-                tvShow.poster_path
-                  ? `https://image.tmdb.org/t/p/w500${tvShow.poster_path}`
-                  : imageReplacement
-              }
-              alt={tvShow.title}
-              className="poster-image"
-            />
-            <div className="summary">
-              <p>{tvShow.overview}</p>
-
-              <p className="release-date">
-                Release Date: {tvShow.first_air_date}
-              </p>
-              <p
-                className={`rating ${
-                  (tvShow.release_date || tvShow.first_air_date) &&
-                  ((new Date(tvShow.release_date) <= new Date() &&
-                    tvShow.vote_average) ||
-                    (new Date(tvShow.first_air_date) <= new Date() &&
-                      tvShow.vote_average))
-                }`}
-              >
-                <span>Rating: </span>
-                {(tvShow.release_date || tvShow.first_air_date) &&
-                ((new Date(tvShow.release_date) <= new Date() &&
-                  tvShow.vote_average) ||
-                  (new Date(tvShow.first_air_date) <= new Date() &&
-                    tvShow.vote_average))
-                  ? `${tvShow.vote_average.toFixed(1)}/10`
-                  : "N/A"}
-              </p>
-            </div>
-          </div>
-
-          <h3 className="cast-heading">Cast and Crew</h3>
-
-          {cast.length > 0 ? (
-            <ul className="cast-list">
-              {cast.slice(0, 10).map((person) => (
-                <Link to={`/actors/${person.id}`} key={person.id}>
-                  <li className="actor-container">
-                    <img
-                      src={
-                        person.profile_path
-                          ? `https://image.tmdb.org/t/p/w200${person.profile_path}`
-                          : imageReplacement
-                      }
-                      alt={person.name}
-                      className="cast-image"
-                    />
-                    <div className="cast-details">
-                      <p className="cast-name">{person.name}</p>
-                      <p className="cast-character">({person.character})</p>
-                    </div>
-                  </li>
-                </Link>
-              ))}
-            </ul>
-          ) : (
-            <p className="no-cast">No cast information available.</p>
+          <p>
+            <span className='year-label label'> {year}</span>
+            <span className='runtime-label label'>{episode_run_time && episode_run_time.length > 0 ? `${episode_run_time[0]} min` : 'N/A'}</span>
+          </p>
+        </div>
+        <div className="image-container">
+          <img className="poster" src={`https://image.tmdb.org/t/p/w500/${poster_path}`} alt={name} onError={(e) => e.target.src = FallbackImage} />
+          {trailerKey && (
+            <iframe
+              title={`${name} Trailer`}
+              width="560"
+              height="315"
+              src={`https://www.youtube.com/embed/${trailerKey}`}
+              frameBorder="0"
+              allowFullScreen
+            ></iframe>
           )}
-        </>
-      ) : (
-        <p className="loading">Loading tvShow details...</p>
-      )}
+        </div>
+      </div>
+      <div className="details-content">
+        <div className='overview-section'>
+          <h2>Overview</h2>
+          <p>{overview}</p>
+        </div>
+
+        <h2>Cast</h2>
+        <Slider {...sliderSettings}>
+          {credits.cast.map((person) => (
+            <div key={person.id} className="cast-item">
+              <Link to={`/person/${person.id}`}>
+                {person.profile_path ? (
+                  <img
+                    src={`https://image.tmdb.org/t/p/w1280/${person.profile_path}`}
+                    alt={person.name}
+                  />
+                ) : (
+                  <img src={FallbackImage} alt={person.name} />
+                )}
+                <h4 className="p-card-title">{person.name}</h4>
+                {person.character && (
+                  <p className="character-name">{`as ${person.character}`}</p>
+                )}
+              </Link>
+            </div>
+          ))}
+        </Slider>
+      </div>
     </div>
   );
 };
 
-export default TvShowDetailsPage;
+export default TVShowDetailsPage;

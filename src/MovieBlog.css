@@ -1,0 +1,67 @@
+/* MovieBlog.css */
+
+.movie-blog-wrapper {
+    margin-block: 3rem;
+    padding-inline: 20px;
+}
+
+.movie-blog {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 20px;
+    text-align: left;
+}
+
+.blog-post {
+    background-color: #fff;
+    border: 1px solid #e1e1e1;
+    border-radius: 8px;
+    text-align: left;
+    height: fit-content;
+    overflow: hidden;
+}
+
+.blog-post-content {
+    padding: 10px;
+}
+
+.blog-post-image {
+    width: 100%;
+    height: auto;
+    border-bottom: 1px solid #e1e1e1;
+
+}
+
+.blog-post-release-date {
+    color: #888;
+    margin-bottom: 5px;
+    text-align: left;
+}
+
+.blog-post-overview {
+    font-size: 0.9rem;
+    color: #333;
+    text-align: left;
+    max-height: max-content;
+    padding-block: 0.8rem;
+}
+
+.read-more-link {
+    font-size: 14px;
+    color: rgba(0, 0, 0, 0.5);
+}
+
+.blog-post-rating,
+.blog-post-release-date {
+    display: inline-block;
+    color: rgba(0, 0, 0, 0.5);
+    margin: 0 1rem 0 0 !important;
+    padding-block: 0;
+    line-height: normal;
+
+}
+
+.blog-post-release-date {
+    border-right: 2px solid rgba(0, 0, 0, 0.5);
+    padding-right: 1rem;
+}

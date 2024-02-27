@@ -1,12 +1,12 @@
-import React from "react";
-import { PacmanLoader } from "react-spinners";
+
+// Loader.js
+import React from 'react';
+
 
 const Loader = () => {
   return (
     <div className="loader-container">
-      <div className="loader">
-        <PacmanLoader color="#c790d8" size={25} />
-      </div>
+      <div className="loader"></div>
     </div>
   );
 };

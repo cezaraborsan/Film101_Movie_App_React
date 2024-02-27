@@ -1,0 +1,118 @@
+/* MoviesPage.css */
+.movies-page {
+    padding-top: 4rem;
+    max-width: 1400px;
+    margin: 0 auto;
+}
+
+.hero-description {
+    text-align: left;
+    max-width: 60%;
+}
+
+
+.movie-card {
+    margin: 0 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    overflow: hidden;
+    transition: transform 0.3s ease-in-out;
+}
+
+/* Styling for the react-slick slider */
+.slick-prev,
+.slick-next {
+    font-size: 24px;
+    color: #fff;
+}
+
+.slick-prev {
+    left: -30px;
+}
+
+.slick-next {
+    right: -30px;
+}
+
+
+.genres-section {
+    margin-top: 20px;
+}
+
+.genre-list {
+    display: flex;
+    gap: 10px;
+}
+
+.genre-button {
+    padding: 10px;
+    background-color: transparent;
+    color: #2980b9;
+    border: 1px solid #2980b9;
+    cursor: pointer;
+    border-radius: 5px;
+    transition: background-color 0.3s;
+
+}
+
+.genre-button.active {
+    background-color: #2980b9;
+    color: white;
+}
+
+.slider-container {
+    margin-top: 20px;
+}
+
+.genre-list select {
+    cursor: pointer;
+    padding: 10px;
+    background-color: transparent;
+    color: #2980b9;
+    border: 1px solid #2980b9;
+    cursor: pointer;
+    border-radius: 5px;
+    transition: background-color 0.3s;
+
+    line-height: normal;
+    position: relative;
+
+}
+
+.genre-list select:hover,
+.genre-button:hover {
+    background-color: #2980b9;
+    border: 1px solid #ffffff;
+    color: white;
+
+}
+
+@media screen and (max-width: 950px) {
+    .hero-description {
+        max-width: 80%;
+    }
+
+    .movies-page {
+        padding-block: 6rem;
+        padding-inline: 20px;
+    }
+
+}
+
+@media screen and (max-width: 768px) {
+    .hero-description {
+        max-width: 90%;
+    }
+
+    .movie-card {
+        margin: 0 5px;
+    }
+
+}
+
+@media screen and (max-width: 470px) {
+    .hero-description {
+        max-width: 100%;
+    }
+
+}

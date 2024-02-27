@@ -1,0 +1,55 @@
+/* GenreSection.css */
+.genre-section {
+    width: 100vw;
+}
+
+.genre-section-wrapper {
+    position: relative;
+    height: 400px;
+    background-color: rgb(235, 69, 43);
+    background: linear-gradient(90deg, rgba(235, 69, 43, 1) 11%, rgba(239, 160, 50, 1) 57%);
+    color: #fff;
+    padding-inline: 2rem;
+    margin-block: 3rem;
+}
+
+.overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.2);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+
+.discover-button {
+    padding: 10px 20px;
+    font-size: 1.5rem;
+    background-color: transparent;
+    color: rgba(255, 255, 255, 0.8);
+    text-decoration: none;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: all 0.3s ease-in-out;
+    border: 1px solid rgba(255, 255, 255, 0.8);
+}
+
+.discover-button:hover {
+    background-color: rgba(239, 160, 50, 0.5);
+    transition: all 0.3s ease-in-out;
+}
+
+.genre-section-content {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 1.3rem;
+    padding-inline: 2rem;
+}
