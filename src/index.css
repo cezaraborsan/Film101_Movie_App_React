@@ -4,12 +4,7 @@
 @import "slick-carousel/slick/slick-theme.css";
 
 /* Font Face */
-@font-face {
-  font-family: 'Candu';
-  src: local('Candu'), url('/Users/cezara/Desktop/Film101_Movie_App_React/public/fonts/Candu.ttf') format('truetype');
-  font-weight: normal;
-  font-style: normal;
-}
+
 
 /* Global Styles */
 * {
