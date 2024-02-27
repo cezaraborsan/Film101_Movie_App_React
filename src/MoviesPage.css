@@ -1,6 +1,6 @@
 /* MoviesPage.css */
 .movies-page {
-    padding-top: 4rem;
+    padding: 4rem 0 1rem;
     max-width: 1400px;
     margin: 0 auto;
 }
