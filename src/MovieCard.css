@@ -32,6 +32,9 @@
     border-radius: 4px;
     background-color: #637CE1;
     color: white !important;
+    white-space: nowrap !important;
+    overflow: hidden !important;
+    text-overflow: ellipsis !important;
 }
 
 
@@ -42,7 +45,7 @@
     width: min-content;
     padding: 0.2rem 0.4rem;
     border-radius: 4px;
-
+    margin-right: 0.5rem;
 }
 
 .red {

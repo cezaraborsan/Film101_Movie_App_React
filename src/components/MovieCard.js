@@ -13,9 +13,10 @@ const MovieCard = ({ movie, mediaType }) => {
     } = movie;
 
     const [genres, setGenres] = useState([]);
-    const apiKey = process.env.REACT_APP_API_KEY;
+
 
     useEffect(() => {
+        const apiKey = process.env.REACT_APP_API_KEY;
         const fetchGenres = async () => {
             try {
                 let genreEndpoint;
