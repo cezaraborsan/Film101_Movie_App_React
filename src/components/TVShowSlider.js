@@ -8,7 +8,6 @@ import MovieCard from './MovieCard';
 
 const TVShowSlider = ({ title, shows }) => {
 
-
     const settings = {
         dots: true,
         infinite: false,
@@ -31,15 +30,14 @@ const TVShowSlider = ({ title, shows }) => {
                 settings: {
                     slidesToShow: 2,
                     slidesToScroll: 2,
-                    initialSlide: 2,
                     dots: false,
                 },
             },
             {
                 breakpoint: 480,
                 settings: {
-                    slidesToShow: 1,
-                    slidesToScroll: 1,
+                    slidesToShow: 2,
+                    slidesToScroll: 2,
                     dots: false,
                 },
             },

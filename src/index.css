@@ -275,10 +275,6 @@ img {
 }
 
 /* Hide Slick Carousel Arrows */
-.slick-next,
-.slick-prev {
-  display: none !important;
-}
 
 /* Hero Container Styles */
 .hero-container {
@@ -304,4 +300,21 @@ img {
 
 .upcoming-movie-title {
   color: rgba(255, 255, 255, 0.7) !important;
+}
+
+.slick-prev {
+  left: 20px !important;
+}
+
+.slick-next {
+  right: 20px !important;
+}
+
+.slick-prev,
+.slick-next {
+  z-index: 100000;
+  background: rgba(0, 0, 0, 0.8) !important;
+  border-radius: 50%;
+  padding-top: 1px !important;
+
 }

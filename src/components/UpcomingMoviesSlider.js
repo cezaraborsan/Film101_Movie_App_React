@@ -4,13 +4,7 @@ import Slider from 'react-slick';
 import { Link } from 'react-router-dom';
 
 const UpcomingMoviesSlider = ({ movies }) => {
-    const CustomPrevArrow = (props) => (
-        <button {...props} className="slick-prev"></button>
-    );
 
-    const CustomNextArrow = (props) => (
-        <button {...props} className="slick-next"></button>
-    );
 
     const FallbackImage = "../image_replacement.png";
 
@@ -21,12 +15,13 @@ const UpcomingMoviesSlider = ({ movies }) => {
         slidesToShow: 2,
         slidesToScroll: 1,
         initialSlide: 0,
+        autoplaySpeed: 300,
         responsive: [
             {
                 breakpoint: 1990,
                 settings: {
                     slidesToShow: 2,
-                    slidesToScroll: 1,
+                    slidesToScroll: 2,
                     dots: true,
                 },
             },
@@ -34,7 +29,7 @@ const UpcomingMoviesSlider = ({ movies }) => {
                 breakpoint: 1024,
                 settings: {
                     slidesToShow: 2,
-                    slidesToScroll: 1,
+                    slidesToScroll: 2,
                     dots: true,
                 },
             },
@@ -73,8 +68,6 @@ const UpcomingMoviesSlider = ({ movies }) => {
                 },
             },
         ],
-        prevArrow: <CustomPrevArrow />,
-        nextArrow: <CustomNextArrow />,
     };
 
     return (

@@ -5,7 +5,6 @@
     margin: 0 auto;
 }
 
-
 .slider {
     position: relative;
     max-width: 100%;
@@ -51,22 +50,7 @@
 }
 
 /* Optional: Styles for Slider dots */
-.slick-prev,
-.slick-next {
-    order: none;
-    cursor: pointer;
-    border-radius: 5px;
-    outline: none;
-    transition: background 0.3s ease;
-    padding: 4rem;
-    background: rgba(0, 0, 0, 0.4);
-    z-index: 10000;
-}
 
-.slick-prev:hover,
-.slick-next:hover {
-    background: black;
-}
 
 /* * responsive */
 
@@ -78,6 +62,4 @@
 
 @media screen and (max-width: 768px) {}
 
-@media screen and (max-width: 470px) {
-    
-}
+@media screen and (max-width: 470px) {}

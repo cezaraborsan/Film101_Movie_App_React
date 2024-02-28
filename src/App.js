@@ -7,9 +7,7 @@ import HomePage from "./components/pages/HomePage";
 import Footer from "./components/Footer";
 import MoviesPage from "./components/pages/MoviesPage";
 import TVShowsPage from "./components/pages/TVShowsPage";
-
 import React from 'react';
-
 import MovieDetailsPage from './components/pages/MovieDetailsPage';
 import TvShowDetailsPage from './components/pages/TvShowDetailsPage';
 import PersonDetailsPage from './components/pages/PersonDetailsPage';

@@ -5,14 +5,6 @@ import MovieCard from './MovieCard';
 import { Link } from 'react-router-dom';
 
 const TrendingMoviesSlider = ({ movies }) => {
-    const CustomPrevArrow = (props) => (
-        <button {...props} className="slick-prev"></button>
-    );
-
-    const CustomNextArrow = (props) => (
-        <button {...props} className="slick-next"></button>
-    );
-
     // const FallbackImage = "../image_replacement.png";
 
     const settings = {
@@ -22,13 +14,13 @@ const TrendingMoviesSlider = ({ movies }) => {
         slidesToShow: 4,
         slidesToScroll: 4,
         initialSlide: 0,
+        autoplaySpeed: 300,
         responsive: [
             {
                 breakpoint: 1024,
                 settings: {
                     slidesToShow: 3,
-
-
+                    slidesToScroll: 3,
                 },
             },
             {
@@ -41,14 +33,12 @@ const TrendingMoviesSlider = ({ movies }) => {
             {
                 breakpoint: 480,
                 settings: {
-                    slidesToShow: 1,
-                    slidesToScroll: 1,
+                    slidesToShow: 2,
+                    slidesToScroll: 2,
 
                 },
             },
         ],
-        prevArrow: <CustomPrevArrow />,
-        nextArrow: <CustomNextArrow />,
     };
 
     return (
@@ -58,7 +48,6 @@ const TrendingMoviesSlider = ({ movies }) => {
                 {movies.map((movie) => (
                     <div key={movie.id} className='slider'>
                         <Link to={`/movie/${movie.id}`}>
-                            {/* <MovieCard movie={movie} /> */}
                             <MovieCard movie={movie} mediaType="movie" />
                         </Link>
                     </div>

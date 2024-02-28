@@ -137,24 +137,13 @@ const MoviesPage = () => {
                     </select>
                 </div>
             </div>
-
-            {/* Movies Slider */}
             <MovieSlider
                 title={selectedGenreId ? genres.find((genre) => genre.id === selectedGenreId)?.name : 'Action Movies'}
                 movies={selectedGenreId ? genreMovies : movies}
             />
-
-            {/* Popular Movies Slider */}
             <MovieSlider title="Popular Movies" movies={movies} />
-
             <MovieTrailersMPage apiKey={apiKey} />
-
             <MoviePageBlog apiKey={apiKey} />
-
-            {/* In Theatres Slider (commented out, adjust as needed) */}
-            {/* <MovieSlider title="In Theatres" movies={inTheatres} /> */}
-
-            {/* Upcoming Movies Slider */}
             <MovieSlider title="Upcoming Movies" movies={upcomingMovies} />
         </div>
     );

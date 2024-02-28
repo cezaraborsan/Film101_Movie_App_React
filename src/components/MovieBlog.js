@@ -5,10 +5,8 @@ import '../MovieBlog.css';
 import { Link } from 'react-router-dom';
 
 const MovieBlog = ({ movies, numberOfMovies }) => {
-    // const [expandedPosts, setExpandedPosts] = useState([]);
 
     const limitedMovies = movies.slice(0, numberOfMovies);
-
     const getYearFromDate = (dateString) => {
         return dateString ? new Date(dateString).getFullYear() : '';
     };
@@ -17,7 +15,6 @@ const MovieBlog = ({ movies, numberOfMovies }) => {
         <div className="movie-blog-wrapper">
             <div className="movie-blog">
                 {limitedMovies.map((movie) => {
-                    // const isExpanded = expandedPosts.includes(movie.id);
 
                     return (
                         <div key={movie.id} className={`blog-post`}>

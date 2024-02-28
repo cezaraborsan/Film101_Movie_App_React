@@ -132,9 +132,6 @@ const TVShowsPage = () => {
         <div className="movies-page">
             <div className="hero-content">
                 <h1 className='page-title'>TV Shows</h1>
-                {/* <p className="hero-description">
-                    Get ready for some TV show magic! Our lineup of the latest blockbuster series is here to sweep you off your feet. From thrilling dramas to hilarious comedies, we've got the perfect show for your every mood. Grab your snacks, hit play, and let the TV show marathon begin!
-                </p> */}
             </div>
 
             <div className="genres-section">
@@ -160,16 +157,10 @@ const TVShowsPage = () => {
                     </select>
                 </div>
             </div>
-
-            {/* Use TVShowSlider for each section */}
             <TVShowSlider title="Drama TV Shows" shows={selectedGenreId ? genreTVShows : tvShows} />
-
             <TVShowSlider title="Popular TV Shows" shows={tvShows} />
-
             <TVShowBlog apiKey={apiKey} />
-
             <TVShowSlider title="Discover TV Shows" shows={tvShows} />
-
             <TVShowTrailers apiKey={apiKey} />
         </div>
     );

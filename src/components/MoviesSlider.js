@@ -17,6 +17,7 @@ const MovieSlider = ({ title, movies }) => {
         slidesToShow: 4,
         slidesToScroll: 4,
         initialSlide: 0,
+        autoplaySpeed: 300,
         responsive: [
             {
                 breakpoint: 1024,
@@ -38,8 +39,8 @@ const MovieSlider = ({ title, movies }) => {
             {
                 breakpoint: 480,
                 settings: {
-                    slidesToShow: 1,
-                    slidesToScroll: 1,
+                    slidesToShow: 2,
+                    slidesToScroll: 2,
 
                 },
             },

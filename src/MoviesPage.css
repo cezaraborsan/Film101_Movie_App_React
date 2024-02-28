@@ -18,22 +18,6 @@
     transition: transform 0.3s ease-in-out;
 }
 
-/* Styling for the react-slick slider */
-.slick-prev,
-.slick-next {
-    font-size: 24px;
-    color: #fff;
-}
-
-.slick-prev {
-    left: -30px;
-}
-
-.slick-next {
-    right: -30px;
-}
-
-
 .genres-section {
     margin-top: 20px;
 }

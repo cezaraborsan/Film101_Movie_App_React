@@ -21,7 +21,6 @@ const TVShowsBlog = ({ apiKey }) => {
                 // Keep only the top 10 TV shows
                 const top10TVShows = response.data.results.slice(0, 10);
 
-                // Format the rating to display only one decimal place
                 const formattedTVShows = top10TVShows.map((tvShow) => ({
                     ...tvShow,
                     vote_average: typeof tvShow.vote_average === 'number' ? tvShow.vote_average.toFixed(1) : 'N/A',

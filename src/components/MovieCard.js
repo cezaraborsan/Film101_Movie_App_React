@@ -56,7 +56,6 @@ const MovieCard = ({ movie, mediaType }) => {
     const ratingText =
         isReleased && vote_average ? vote_average.toFixed(1) : "N/A";
 
-    // Check if genre_ids is an array before mapping over it
     const movieGenres = Array.isArray(genre_ids)
         ? genre_ids.map((genreId) =>
             genres.find((genre) => genre.id === genreId)?.name

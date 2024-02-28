@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-
-import "../MovieTrailers.css";  // You may need to adjust the CSS file path based on your project structure.
+import "../MovieTrailers.css";
 
 const TVShowTrailers = ({ apiKey }) => {
     const [trailers, setTrailers] = useState([]);
