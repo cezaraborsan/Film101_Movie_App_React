@@ -3,6 +3,7 @@
 @import "slick-carousel/slick/slick.css";
 @import "slick-carousel/slick/slick-theme.css";
 
+@import url('https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@100..900&display=swap');
 /* Font Face */
 
 
@@ -55,6 +56,30 @@ h5,
 h6 {
   color: rgba(0, 0, 0, 0.8);
   text-align: left;
+  font-family: "Roboto Slab", serif;
+}
+
+.page-title {
+  text-align: center;
+}
+
+.genres-section {
+  display: flex;
+  justify-content: center;
+}
+
+.section-title {
+  padding-block: 2rem 1.5rem;
+  text-align: center;
+}
+
+.m-card-title {
+  padding-block: 0.5rem !important;
+}
+
+.m-card-genres {
+  font-size: 14px;
+  color: #333;
 }
 
 h3,
@@ -127,30 +152,30 @@ p {
   }
 }
 
-@media (max-width: 768px) {
+@media (max-width: 450px) {
   h1 {
-    font-size: 32px;
+    font-size: 48px;
 
   }
 
   h2 {
-    font-size: 24px;
+    font-size: 32px;
   }
 
   h3 {
-    font-size: 18px;
+    font-size: 28px;
   }
 
   h4 {
-    font-size: 16px;
+    font-size: 24px;
   }
 
   h5 {
-    font-size: 14px;
+    font-size: 20px;
   }
 
   h6 {
-    font-size: 12px;
+    font-size: 16px;
   }
 }
 

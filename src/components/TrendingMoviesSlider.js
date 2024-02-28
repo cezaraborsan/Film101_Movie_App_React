@@ -53,12 +53,13 @@ const TrendingMoviesSlider = ({ movies }) => {
 
     return (
         <div className="slider-container">
-            <h2>Trending Movies</h2>
+            <h2 className='section-title'>Trending Movies</h2>
             <Slider {...settings}>
                 {movies.map((movie) => (
                     <div key={movie.id} className='slider'>
                         <Link to={`/movie/${movie.id}`}>
-                            <MovieCard movie={movie} />
+                            {/* <MovieCard movie={movie} /> */}
+                            <MovieCard movie={movie} mediaType="movie" />
                         </Link>
                     </div>
                 ))}

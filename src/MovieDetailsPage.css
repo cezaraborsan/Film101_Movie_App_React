@@ -6,11 +6,18 @@
   padding-block: 4rem 0;
 }
 
+.details-header,
+.overview-section,
+.m-cast-title {
+  padding-inline: 10px;
+}
+
 .poster {
   width: 320px;
-
   margin-right: 20px;
 }
+
+
 
 .image-container {
   display: grid;
@@ -29,18 +36,15 @@
 }
 
 
-
 .movie-info span {
   font-size: 1.2rem;
   margin-right: 1rem;
-  padding-block: 0;
-
 }
 
 .rating-label {
   float: right;
   padding: 15px !important;
-  margin: 0 0 0 2rem !important;
+  margin: 0 1rem 0 2rem !important;
 
 }
 
@@ -51,17 +55,18 @@
 }
 
 
-.overview-section {
+.overview-section,
+.movie-details-overview-hide {
   padding-block: 1.5rem;
 }
 
 .movie-details-overview {
-  padding: 1rem 0 2rem;
+  padding: 0rem 0 2rem;
+  max-width: 60%;
 }
 
 
 .movie-info p {
-  margin: 5px 0;
   color: #555;
   text-align: left !important;
 
@@ -100,26 +105,42 @@ iframe {
 
 
 .character-name {
-  margin: 0 auto !important;
+  margin: 0 !important;
   width: max-content;
   color: rgba(0, 0, 0, 0.6);
+  text-align: left;
+
 }
 
 .slick-dots {}
 
 .slick-list {
   margin-bottom: 2.5rem;
-
 }
 
 .movie-details-overview-hide {
   display: none;
 }
 
+.info-labels {
+  margin-block: 0.5rem;
+}
+
+.movie-genres {
+  border: 1px solid rgb(255, 255, 255);
+  padding: 0.3rem 0.6rem;
+  margin-block: 0.5rem 1rem;
+  font-size: 1.2rem;
+  border-radius: 4px;
+  background-color: #637CE1;
+  color: white !important;
+  width: fit-content;
+}
+
 @media screen and (max-width: 950px) {
   .movie-details {
     padding-block: 6rem;
-    padding-inline: 20px;
+    padding-inline: 10px;
   }
 
   .image-container {
@@ -130,6 +151,10 @@ iframe {
 
   .movie-details-overview-hide {
     display: block;
+  }
+
+  .movie-details-overview-hide {
+    padding-block: 0rem;
   }
 
   .movie-details-title,
@@ -147,8 +172,7 @@ iframe {
   }
 }
 
-@media screen and (max-width: 600px) {
-
+@media screen and (max-width: 768px) {
   .poster-wrapper {
     display: flex;
     flex-direction: column;
@@ -157,13 +181,15 @@ iframe {
   .poster {
     width: 100%;
   }
+
+  .movie-details-overview-hide {
+    padding-block: 1rem;
+  }
 }
+
 
 @media screen and (max-width: 470px) {
   .hero-description {
     max-width: 100%;
   }
-
-
-
 }

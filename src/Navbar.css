@@ -11,7 +11,7 @@
   top: 0;
   left: 0;
   width: 100%;
-  padding: 15px 20px;
+  padding: 15px 10px;
   background: #637CE1;
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
   z-index: 10000;
@@ -24,7 +24,7 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding-inline: 20px;
+  padding-inline: 10px;
 }
 
 a {
@@ -92,9 +92,10 @@ a {
   outline: none;
   border-radius: 6px;
   padding: 1rem;
-  background-color: #637CE1;
+  background-color: #ffffff;
   font-size: 18px;
-  color: white;
+  color: rgba(0, 0, 0, 0.9);
+  border: 2px solid rgba(0, 0, 0, 0.5);
 }
 
 .search-box input ::placeholder {
@@ -107,19 +108,17 @@ a {
   display: none;
 }
 
-/* responsive */
-@media screen and (max-width: 1160px) {
-  .nav {
-    padding: 0px 100px;
-  }
-
-
+.links-wrapper {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
 }
 
+/* responsive */
+@media screen and (max-width: 1160px) {}
+
 @media screen and (max-width: 950px) {
-  .nav {
-    padding: 15px 50px;
-  }
+
 
   .nav .search-box {
     max-width: 60%;
@@ -134,9 +133,7 @@ a {
     display: block;
   }
 
-  .nav {
-    padding: 15px 20px;
-  }
+
 
   .nav .nav-links {
     position: fixed;

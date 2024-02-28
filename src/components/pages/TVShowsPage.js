@@ -122,7 +122,7 @@ const TVShowsPage = () => {
         setSelectedGenreId(genreId);
     };
 
-    const maxVisibleGenres = 4;
+    const maxVisibleGenres = 3;
 
     if (loading) {
         return <Loader />;
@@ -131,10 +131,10 @@ const TVShowsPage = () => {
     return (
         <div className="movies-page">
             <div className="hero-content">
-                <h1>TV Shows</h1>
-                <p className="hero-description">
+                <h1 className='page-title'>TV Shows</h1>
+                {/* <p className="hero-description">
                     Get ready for some TV show magic! Our lineup of the latest blockbuster series is here to sweep you off your feet. From thrilling dramas to hilarious comedies, we've got the perfect show for your every mood. Grab your snacks, hit play, and let the TV show marathon begin!
-                </p>
+                </p> */}
             </div>
 
             <div className="genres-section">

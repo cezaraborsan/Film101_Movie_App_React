@@ -60,7 +60,7 @@ const MovieTrailers = ({ apiKey }) => {
 
     return (
         <div className="movie-trailers">
-            <h2>In Theaters Now</h2>
+            <h2 className='section-title'>In Theaters Now</h2>
             <div className="trailers-list">
                 {trailers.map((trailer) => (
                     <div key={trailer.id} className="trailer">

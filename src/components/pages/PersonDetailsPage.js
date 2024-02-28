@@ -87,7 +87,7 @@ const PersonDetailsPage = () => {
                     </div>
                     {personDetails.movie_credits && personDetails.movie_credits.cast && (
                         <div className="person-movies">
-                            <h3>Known for:</h3>
+                            <h3 className='known-for-title'>Known for:</h3>
                             <Slider {...sliderSettings}>
                                 {personDetails.movie_credits.cast.slice(0, 15).map((movie) => (
                                     <Link to={`/movie/${movie.id}`} className='known-for-movie-card' key={movie.id}>

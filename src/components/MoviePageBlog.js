@@ -37,7 +37,7 @@ const MovieBlog = ({ apiKey }) => {
 
     return (
         <div className="movie-blog-wrapper">
-            <h2>Top Rated Movies</h2>
+            <h2 className='section-title'>Top Rated Movies</h2>
             <div className="movie-blog">
                 {topRatedMovies.map((movie) => (
                     <div key={movie.id} className="blog-post">

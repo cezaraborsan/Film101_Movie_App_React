@@ -48,12 +48,12 @@ const MovieSlider = ({ title, movies }) => {
 
     return (
         <div className="slider-container">
-            <h2>{title}</h2>
+            <h2 className='section-title'>{title}</h2>
             <Slider {...settings}>
                 {movies.map((movie) => (
                     <div key={movie.id} className="slider">
                         <Link to={`/movie/${movie.id}`}>
-                            <MovieCard movie={movie} />
+                            <MovieCard movie={movie} mediaType="movie" />
                         </Link>
                     </div>
                 ))}

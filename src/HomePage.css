@@ -70,8 +70,14 @@
 
 /* * responsive */
 
-@media screen and (max-width: 950px) {}
+@media screen and (max-width: 950px) {
+    .home-page {
+        padding-block: 6rem 1rem;
+    }
+}
 
 @media screen and (max-width: 768px) {}
 
-@media screen and (max-width: 470px) {}
+@media screen and (max-width: 470px) {
+    
+}

@@ -1,4 +1,3 @@
-// TVShowDetailsPage.js
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { useParams } from 'react-router-dom';
@@ -11,10 +10,12 @@ const TVShowDetailsPage = () => {
   const { id } = useParams();
   const [tvShow, setTVShow] = useState(null);
   const [trailerKey, setTrailerKey] = useState(null);
+  const [genres, setGenres] = useState([]);
   const [loading, setLoading] = useState(true);
   const apiKey = process.env.REACT_APP_API_KEY;
 
   const FallbackImage = "../image_replacement.png";
+
 
   useEffect(() => {
     const fetchTVShowDetails = async () => {
@@ -36,7 +37,19 @@ const TVShowDetailsPage = () => {
       }
     };
 
+    const fetchGenres = async () => {
+      try {
+        const response = await axios.get(
+          `https://api.themoviedb.org/3/genre/tv/list?api_key=${apiKey}&language=en-US`
+        );
+        setGenres(response.data.genres);
+      } catch (error) {
+        console.error('Error fetching TV show genres:', error);
+      }
+    };
+
     fetchTVShowDetails();
+    fetchGenres();
   }, [id, apiKey]);
 
   if (loading) {
@@ -49,10 +62,8 @@ const TVShowDetailsPage = () => {
 
   const { name, first_air_date, vote_average, overview, poster_path, credits, episode_run_time } = tvShow;
 
-  // Extracting the year from the release date
   const year = first_air_date ? new Date(first_air_date).getFullYear() : '';
 
-  // Slick slider settings
   const sliderSettings = {
     dots: true,
     infinite: false,
@@ -61,30 +72,7 @@ const TVShowDetailsPage = () => {
     slidesToScroll: 4,
     initialSlide: 0,
     responsive: [
-      {
-        breakpoint: 1024,
-        settings: {
-          slidesToShow: 3,
-          slidesToScroll: 3,
-          infinite: true,
-          dots: true,
-        },
-      },
-      {
-        breakpoint: 600,
-        settings: {
-          slidesToShow: 2,
-          slidesToScroll: 2,
-          initialSlide: 2,
-        },
-      },
-      {
-        breakpoint: 480,
-        settings: {
-          slidesToShow: 1,
-          slidesToScroll: 1,
-        },
-      },
+      // ... (slider settings)
     ],
   };
 
@@ -103,6 +91,10 @@ const TVShowDetailsPage = () => {
   const ratingText =
     isReleased && vote_average ? vote_average.toFixed(1) : "N/A";
 
+  const tvShowGenres = tvShow.genres.map((genre) => genre.name);
+
+  const limitedGenres = tvShowGenres.slice(0, 2);
+
   return (
     <div className="movie-details">
       <div className="details-header">
@@ -117,7 +109,19 @@ const TVShowDetailsPage = () => {
           </p>
         </div>
         <div className="image-container">
-          <img className="poster" src={`https://image.tmdb.org/t/p/w500/${poster_path}`} alt={name} onError={(e) => e.target.src = FallbackImage} />
+          <div className="poster-wrapper">
+            <img
+              className="poster"
+              src={`https://image.tmdb.org/t/p/w500/${poster_path}`}
+              alt={name}
+              onError={(e) => (e.target.src = FallbackImage)}
+            />
+
+            {genres.length > 0 && (
+              <p className="movie-genres">{limitedGenres.join(" | ")}</p>
+            )}
+            <p className="movie-details-overview-hide">{overview}</p>
+          </div>
           {trailerKey && (
             <iframe
               title={`${name} Trailer`}
@@ -136,7 +140,7 @@ const TVShowDetailsPage = () => {
           <p>{overview}</p>
         </div>
 
-        <h2>Cast</h2>
+        <h2 className='m-cast-title'>Cast</h2>
         <Slider {...sliderSettings}>
           {credits.cast.map((person) => (
             <div key={person.id} className="cast-item">

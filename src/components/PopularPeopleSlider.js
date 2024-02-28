@@ -58,7 +58,7 @@ const PopularPeopleSlider = ({ people }) => {
 
     return (
         <div className="popular-people-slider">
-            <h2>Most Popular Celebs</h2>
+            <h2 className='section-title'>Most Popular Celebs</h2>
             <Slider {...settings}>
                 {people.map((person) => (
                     <div key={person.id} className="slider">

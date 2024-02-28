@@ -38,11 +38,11 @@ const TVShowsBlog = ({ apiKey }) => {
 
     return (
         <>
-            <h2>Top Rated TV Shows</h2>
+            <h2 className='section-title'>Top Rated TV Shows</h2>
             <div className="movie-blog">
                 {topRatedTVShows.map((tvShow) => (
                     <div key={tvShow.id} className="blog-post">
-                        <Link to={`/tvshow/${tvShow.id}`} >
+                        <Link to={`/tv/${tvShow.id}`} >
                             <img
                                 src={`https://image.tmdb.org/t/p/w500/${tvShow.backdrop_path}`}
                                 alt={tvShow.name}
@@ -50,7 +50,7 @@ const TVShowsBlog = ({ apiKey }) => {
                             />
                         </Link>
                         <div className="blog-post-content">
-                            <Link to={`/tvshow/${tvShow.id}`} >
+                            <Link to={`/tv/${tvShow.id}`} >
                                 <h5 className="blog-post-title">{tvShow.title}</h5>
                             </Link>
 
@@ -68,7 +68,7 @@ const TVShowsBlog = ({ apiKey }) => {
                             </p>
 
                             {tvShow.overview.length > 200 && (
-                                <Link to={`/tvshow/${tvShow.id}`} className="read-more-link">
+                                <Link to={`/tv/${tvShow.id}`} className="read-more-link">
                                     Read More
                                 </Link>
                             )}

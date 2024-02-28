@@ -10,7 +10,6 @@
     max-width: 60%;
 }
 
-
 .movie-card {
     margin: 0 10px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
@@ -41,6 +40,8 @@
 
 .genre-list {
     display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
     gap: 10px;
 }
 
@@ -94,7 +95,7 @@
 
     .movies-page {
         padding-block: 6rem;
-        padding-inline: 20px;
+        padding-inline: 10px;
     }
 
 }

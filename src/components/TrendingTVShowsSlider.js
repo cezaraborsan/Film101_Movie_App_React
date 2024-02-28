@@ -56,12 +56,12 @@ const TrendingTVShowsSlider = ({ tvShows }) => {
 
     return (
         <div className="slider-container">
-            <h2>Trending TV Shows</h2>
+            <h2 className='section-title'>Trending TV Shows</h2>
             <Slider {...settings}>
                 {tvShows.map((show) => (
                     <div key={show.id} className='slider'>
-                        <Link to={`/tvshow/${show.id}`}>
-                            <MovieCard movie={show} />
+                        <Link to={`/tv/${show.id}`}>
+                            <MovieCard movie={show} mediaType="tv" />
                         </Link>
                     </div>
                 ))}

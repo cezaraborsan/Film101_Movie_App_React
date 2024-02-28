@@ -13,6 +13,7 @@ const MovieDetailsPage = () => {
   const [movie, setMovie] = useState(null);
   const [trailerKey, setTrailerKey] = useState(null);
   const [loading, setLoading] = useState(true);
+  const [genres, setGenres] = useState([]);
   const apiKey = process.env.REACT_APP_API_KEY;
 
   const FallbackImage = "../image_replacement.png";
@@ -37,7 +38,19 @@ const MovieDetailsPage = () => {
       }
     };
 
+    const fetchGenres = async () => {
+      try {
+        const response = await axios.get(
+          `https://api.themoviedb.org/3/genre/movie/list?api_key=${apiKey}&language=en-US`
+        );
+        setGenres(response.data.genres);
+      } catch (error) {
+        console.error('Error fetching genres:', error);
+      }
+    };
+
     fetchMovieDetails();
+    fetchGenres();
   }, [id, apiKey]);
 
   if (loading) {
@@ -50,10 +63,8 @@ const MovieDetailsPage = () => {
 
   const { title, release_date, vote_average, overview, poster_path, credits, runtime, first_air_date } = movie;
 
-  // Extracting the year from the release date
   const year = release_date ? new Date(release_date).getFullYear() : '';
 
-  // Slick slider settings
   const sliderSettings = {
     dots: false,
     infinite: true,
@@ -89,43 +100,54 @@ const MovieDetailsPage = () => {
     ],
   };
 
-
   const isReleased =
     (release_date && new Date(release_date) <= new Date()) ||
     (first_air_date && new Date(first_air_date) <= new Date());
 
-
   const ratingClass =
     isReleased && vote_average
       ? vote_average <= 5
-        ? "red"
+        ? 'red'
         : vote_average < 7.5
-          ? "yellow"
-          : "green"
-      : "gray";
+          ? 'yellow'
+          : 'green'
+      : 'gray';
 
+  const ratingText = isReleased && vote_average ? vote_average.toFixed(1) : 'N/A';
 
-  const ratingText =
-    isReleased && vote_average ? vote_average.toFixed(1) : "N/A";
+  const movieGenres = movie.genres.map((genre) => genre.name);
+
+  const limitedGenres = movieGenres.slice(0, 2);
 
   return (
     <div className="movie-details">
       <div className="details-header">
         <div className="movie-info">
-          <div className='title-wrapper'>
+          <div className="title-wrapper">
             <h2>{`${title} (${year})`}</h2>
             <span className={`m-card-rating rating-label ${ratingClass}`}>{ratingText}</span>
           </div>
-
-          <p>
-            <span className='year-label label'> {year}</span>
-            <span className='runtime-label label'>{runtime} min</span>
+          <p className='info-labels'>
+            <span className="year-label label"> {year}</span>
+            <span className="runtime-label label">{runtime} min</span>
           </p>
+          {genres.length > 0 && (
+            <p className="movie-genres ">{limitedGenres.join(" | ")}</p>
+          )}
+
         </div>
         <div className="image-container">
-          <div className='poster-wrapper'>
-            <img className="poster" src={`https://image.tmdb.org/t/p/w500/${poster_path}`} alt={title} onError={(e) => e.target.src = FallbackImage} />
-            <p className='movie-details-overview-hide'>{overview}</p>
+          <div className="poster-wrapper">
+            <img
+              className="poster"
+              src={`https://image.tmdb.org/t/p/w500/${poster_path}`}
+              alt={title}
+              onError={(e) => (e.target.src = FallbackImage)}
+            />
+            <div className="movie-details-overview-hide">
+              <p >{overview}</p>
+            </div>
+
           </div>
           {trailerKey && (
             <iframe
@@ -140,23 +162,12 @@ const MovieDetailsPage = () => {
         </div>
       </div>
       <div className="details-content">
-        <div className='overview-section'>
-          <h2 className='movie-details-title'>Overview</h2>
-          <p className='movie-details-overview'>{overview}</p>
-          {movie.backdrop_path ? (
-            <img
-              src={`https://image.tmdb.org/t/p/w1280/${movie.backdrop_path}`}
-              alt={movie.title}
-            />
-          ) : (
-            <img
-              src={FallbackImage}
-              alt={movie.title}
-            />
-          )}
+        <div className="overview-section">
+          <h2 className="movie-details-title">Overview</h2>
+          <p className="movie-details-overview">{overview}</p>
         </div>
 
-        <h2>Cast</h2>
+        <h2 className="m-cast-title">Cast</h2>
         <Slider {...sliderSettings}>
           {credits.cast.map((person) => (
             <div key={person.id} className="cast-item">
@@ -177,6 +188,14 @@ const MovieDetailsPage = () => {
             </div>
           ))}
         </Slider>
+        {movie.backdrop_path ? (
+          <img
+            src={`https://image.tmdb.org/t/p/w1280/${movie.backdrop_path}`}
+            alt={movie.title}
+          />
+        ) : (
+          <img src={FallbackImage} alt={movie.title} />
+        )}
       </div>
     </div>
   );

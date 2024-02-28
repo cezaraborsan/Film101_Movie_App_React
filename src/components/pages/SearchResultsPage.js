@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from "react";
 import { Link, useLocation } from "react-router-dom";
 import "../../MovieSearch.css";
-import Loader from '../Loader'; // Import the Loader component
+import Loader from '../Loader';
 import MovieCard from '../MovieCard';
 
-// ... (other imports)
+
 
 const SearchResultPage = () => {
   const location = useLocation();
@@ -30,12 +30,10 @@ const SearchResultPage = () => {
               const { id, media_type } = item;
 
               // Dynamically generate the link URL based on the media type
-              const linkUrl = `/${media_type}s/${id}`;
-
+              const linkUrl = `/${media_type}/${id}`;
               return (
                 <div key={id} className="movie-card">
                   <Link to={linkUrl}>
-                    {/* Pass the entire item object as 'movie' prop */}
                     <MovieCard movie={item} />
                   </Link>
                 </div>

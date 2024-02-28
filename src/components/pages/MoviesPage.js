@@ -101,7 +101,7 @@ const MoviesPage = () => {
         fetchGenreMovies();
     }, [selectedGenreId, apiKey]);
 
-    const maxVisibleGenres = 4;
+    const maxVisibleGenres = 3;
 
     if (loading) {
         return <Loader />;
@@ -110,10 +110,7 @@ const MoviesPage = () => {
     return (
         <div className="movies-page">
             <div className="hero-content">
-                <h1>MOVIES</h1>
-                <p className="hero-description">
-                    Get ready for some movie magic! Our lineup of the latest blockbuster films is here to sweep you off your feet. From heart-pounding action to heartwarming tales, we've got the perfect movie for your every mood. Grab your snacks, hit play, and let the movie marathon begin!
-                </p>
+                <h1 className='page-title'>MOVIES</h1>
             </div>
 
             {/* Genres Section - Dropdown on smaller screens */}

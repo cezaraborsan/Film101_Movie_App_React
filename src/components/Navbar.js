@@ -78,33 +78,34 @@ const Navbar = () => {
         <Link to="/" className="logo">
           FilmSphere
         </Link>
+        <div className='links-wrapper'>
+          <ul className="nav-links">
+            <i className="uil uil-times navCloseBtn" onClick={closeNav}></i>
+            <li>
+              <Link to="/" className="nav-link" onClick={handleLinkClick}>
+                Home
+              </Link>
+            </li>
+            <li>
+              <Link to="/movies" className="nav-link" onClick={handleLinkClick}>
+                Movies
+              </Link>
+            </li>
+            <li>
+              <Link to="/tvshows" className="nav-link" onClick={handleLinkClick}>
+                TV Shows
+              </Link>
+            </li>
+          </ul>
 
-        <ul className="nav-links">
-          <i className="uil uil-times navCloseBtn" onClick={closeNav}></i>
-          <li>
-            <Link to="/" className="nav-link" onClick={handleLinkClick}>
-              Home
-            </Link>
-          </li>
-          <li>
-            <Link to="/movies" className="nav-link" onClick={handleLinkClick}>
-              Movies
-            </Link>
-          </li>
-          <li>
-            <Link to="/tvshows" className="nav-link" onClick={handleLinkClick}>
-              TV Shows
-            </Link>
-          </li>
-        </ul>
-
-        <i
-          className={`uil uil-search search-icon ${isSearchOpen ? 'uil-times' : 'uil-search'}`}
-          id="searchIcon"
-          onClick={toggleSearch}
-          ref={searchIconRef}
-          tabIndex="0" // Ensure the element is focusable
-        ></i>
+          <i
+            className={`uil uil-search search-icon ${isSearchOpen ? 'uil-times' : 'uil-search'}`}
+            id="searchIcon"
+            onClick={toggleSearch}
+            ref={searchIconRef}
+            tabIndex="0" // Ensure the element is focusable
+          ></i>
+        </div>
         <div className={`search-box ${isSearchOpen ? 'openSearch' : ''}`}>
           <form onSubmit={handleSearchSubmit}>
             <input
