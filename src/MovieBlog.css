@@ -10,7 +10,6 @@
     grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
     gap: 10px;
     text-align: left;
-
 }
 
 .blog-post {
@@ -20,8 +19,6 @@
     text-align: left;
     height: fit-content;
     overflow: hidden;
-    height: fit-content;
-
 }
 
 .blog-post-content {
@@ -33,7 +30,6 @@
     width: 100%;
     height: auto;
     border-bottom: 1px solid #e1e1e1;
-
 }
 
 .blog-post-release-date {

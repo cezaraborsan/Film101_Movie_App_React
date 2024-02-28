@@ -18,7 +18,7 @@ const TVShowTrailers = ({ apiKey }) => {
                     }
                 );
 
-                const first8OnAirTVShows = response.data.results.slice(0, 8);
+                const first8OnAirTVShows = response.data.results.slice(0, 10);
                 setOnAirTVShows(first8OnAirTVShows);
             } catch (error) {
                 console.error('Error fetching on air TV shows:', error);

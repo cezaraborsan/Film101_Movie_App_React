@@ -19,7 +19,7 @@ const MovieTrailers = ({ apiKey }) => {
                     }
                 );
 
-                const first8InTheatersMovies = response.data.results.slice(0, 8);
+                const first8InTheatersMovies = response.data.results.slice(0, 10);
                 setInTheatersMovies(first8InTheatersMovies);
             } catch (error) {
                 console.error('Error fetching in theaters movies:', error);

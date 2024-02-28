@@ -19,7 +19,7 @@ const MovieTrailers = ({ apiKey }) => {
                     }
                 );
 
-                const first5UpcomingMovies = response.data.results.slice(0, 8);
+                const first5UpcomingMovies = response.data.results.slice(0, 10);
                 setUpcomingMovies(first5UpcomingMovies);
             } catch (error) {
                 console.error('Error fetching upcoming movies:', error);
