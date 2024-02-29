@@ -6,11 +6,13 @@ import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
 import '../../PersonDetailsPage.css';
 import MovieCard from '../MovieCard';
+import Loader from '../Loader';
 
 const PersonDetailsPage = () => {
     const { personId } = useParams();
     const [personDetails, setPersonDetails] = useState(null);
     const [showFullBiography, setShowFullBiography] = useState(false);
+    const [loading, setLoading] = useState(true);
 
     useEffect(() => {
         const fetchPersonDetails = async () => {
@@ -18,6 +20,7 @@ const PersonDetailsPage = () => {
                 const apiKey = process.env.REACT_APP_API_KEY;
                 const response = await axios.get(`https://api.themoviedb.org/3/person/${personId}?api_key=${apiKey}&language=en-US&append_to_response=movie_credits`);
                 setPersonDetails(response.data);
+                setLoading(false); // Set loading to false once data is fetched
             } catch (error) {
                 console.error('Error fetching person details:', error);
             }
@@ -63,11 +66,13 @@ const PersonDetailsPage = () => {
                     slidesToScroll: 1,
                     dots: false
                 },
-
             },
         ],
-
     };
+
+    if (loading) {
+        return <Loader />;
+    }
 
     return (
         <div className="person-details">
@@ -76,12 +81,16 @@ const PersonDetailsPage = () => {
                     <div className="person-info">
                         <h2 className="person-name">{personDetails.name}</h2>
                         <div className='person-overview'>
-                            <img src={`https://image.tmdb.org/t/p/w300/${personDetails.profile_path}`} alt={personDetails.name} />
+                            <img className="person-bio-img" src={`https://image.tmdb.org/t/p/w300/${personDetails.profile_path}`} alt={personDetails.name} />
                             <p className="person-bio">
-                                {showFullBiography ? personDetails.biography : `${personDetails.biography.slice(0, 300)}...`}
-                                <span className="read-more" onClick={toggleBiography}>
-                                    {showFullBiography ? ' Read Less' : ' Read More'}
-                                </span>
+                                {personDetails.biography && (
+                                    <>
+                                        {showFullBiography ? personDetails.biography : `${personDetails.biography.slice(0, 300)}...`}
+                                        <span className="read-more" onClick={toggleBiography}>
+                                            {showFullBiography ? ' Read Less' : ' Read More'}
+                                        </span>
+                                    </>
+                                )}
                             </p>
                         </div>
                     </div>

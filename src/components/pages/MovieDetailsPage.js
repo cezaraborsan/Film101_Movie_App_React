@@ -134,7 +134,6 @@ const MovieDetailsPage = () => {
           {genres.length > 0 && (
             <p className="movie-genres ">{limitedGenres.join(" | ")}</p>
           )}
-
         </div>
         <div className="image-container">
           <div className="poster-wrapper">
@@ -147,7 +146,6 @@ const MovieDetailsPage = () => {
             <div className="movie-details-overview-hide">
               <p >{overview}</p>
             </div>
-
           </div>
           {trailerKey && (
             <iframe

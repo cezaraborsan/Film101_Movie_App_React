@@ -103,7 +103,7 @@ const Navbar = () => {
             id="searchIcon"
             onClick={toggleSearch}
             ref={searchIconRef}
-            tabIndex="0" // Ensure the element is focusable
+            tabIndex="0"
           ></i>
         </div>
         <div className={`search-box ${isSearchOpen ? 'openSearch' : ''}`}>

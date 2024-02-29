@@ -28,9 +28,9 @@
 .m-card-genres {
     border: 1px solid rgb(255, 255, 255);
     padding: 0.2rem 0.4rem;
-    font-size: 0.7rem;
+    font-size: 0.9rem;
     border-radius: 4px;
-    background-color: #637CE1;
+    background-color: #aba6a3db;
     color: white !important;
     white-space: nowrap !important;
     overflow: hidden !important;

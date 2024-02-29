@@ -1,6 +1,6 @@
 /* Footer Styles */
 .footer {
-    background: #1f2747;
+    background: #5F7568;
     color: #fff !important;
     padding: 20px 0;
     text-align: center;
@@ -13,23 +13,19 @@
     gap: 2rem;
     max-width: 1400px;
     padding: 0 20px;
-
-
+    margin: 0 auto;
 }
 
 .footer-section {
     max-width: 300px;
     margin: 10px;
-
 }
 
 .footer-section h4,
 .footer-section p {
     color: rgba(255, 255, 255, 0.8) !important;
     text-align: center;
-
 }
-
 
 .social-icons {
     display: flex;

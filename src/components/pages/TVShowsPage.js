@@ -8,14 +8,14 @@ import "../../MoviesPage.css";
 import Loader from '../Loader';
 import TVShowBlog from '../TVShowsBlog';
 import TVShowTrailers from '../TVShowsTrailers';
-import TVShowSlider from '../TVShowSlider'; // Import the TVShowSlider component
+import TVShowSlider from '../TVShowSlider';
 
 const TVShowsPage = () => {
     const [tvShows, setTVShows] = useState([]);
     const [genres, setGenres] = useState([]);
     const [selectedGenreId, setSelectedGenreId] = useState(10759);
     const [genreTVShows, setGenreTVShows] = useState([]);
-    const [loading, setLoading] = useState(true); // Add loading state
+    const [loading, setLoading] = useState(true);
     const apiKey = process.env.REACT_APP_API_KEY;
     // const FallbackImage = "../image_replacement.png";
 
@@ -84,45 +84,12 @@ const TVShowsPage = () => {
         fetchGenreTVShows();
     }, [selectedGenreId, apiKey]);
 
-    // const settings = {
-    //     dots: true,
-    //     infinite: false,
-    //     speed: 500,
-    //     slidesToShow: 4,
-    //     slidesToScroll: 4,
-    //     initialSlide: 0,
-    //     responsive: [
-    //         {
-    //             breakpoint: 1024,
-    //             settings: {
-    //                 slidesToShow: 3,
-    //                 slidesToScroll: 3,
-    //                 infinite: true,
-    //                 dots: true
-    //             }
-    //         },
-    //         {
-    //             breakpoint: 600,
-    //             settings: {
-    //                 slidesToShow: 2,
-    //                 slidesToScroll: 2,
-    //                 initialSlide: 2
-    //             }
-    //         },
-    //         {
-    //             breakpoint: 480,
-    //             settings: {
-    //                 slidesToShow: 1,
-    //                 slidesToScroll: 1
-    //             }
-    //         }
-    //     ]
-    // };
-    const handleGenreClick = (genreId) => {
-        setSelectedGenreId(genreId);
-    };
 
-    const maxVisibleGenres = 3;
+    // const handleGenreClick = (genreId) => {
+    //     setSelectedGenreId(genreId);
+    // };
+
+    // const maxVisibleGenres = 3;
 
     if (loading) {
         return <Loader />;
@@ -136,25 +103,20 @@ const TVShowsPage = () => {
 
             <div className="genres-section">
                 <div className="genre-list">
-                    {genres.slice(0, maxVisibleGenres).map((genre) => (
-                        <button
-                            key={genre.id}
-                            onClick={() => handleGenreClick(genre.id)}
-                            className={`genre-button ${selectedGenreId === genre.id ? 'active' : ''}`}
+                    <div className="select-wrapper">
+                        <select
+                            className="custom-select"
+                            value={selectedGenreId}
+                            onChange={(e) => setSelectedGenreId(parseInt(e.target.value))}
                         >
-                            {genre.name}
-                        </button>
-                    ))}
-                    <select
-                        value={selectedGenreId}
-                        onChange={(e) => handleGenreClick(parseInt(e.target.value))}
-                    >
-                        {genres.map((genre) => (
-                            <option key={genre.id} value={genre.id}>
-                                {genre.name}
-                            </option>
-                        ))}
-                    </select>
+                            {genres.map((genre) => (
+                                <option key={genre.id} value={genre.id}>
+                                    {genre.name}
+                                </option>
+                            ))}
+                        </select>
+                        <div className="select-arrow">&#9662;</div>
+                    </div>
                 </div>
             </div>
             <TVShowSlider title="Drama TV Shows" shows={selectedGenreId ? genreTVShows : tvShows} />

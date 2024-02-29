@@ -125,10 +125,13 @@ const TVShowDetailsPage = () => {
             <h2>{`${name} (${year})`}</h2>
             <span className={`m-card-rating rating-label ${ratingClass}`}>{ratingText}</span>
           </div>
-          <p>
+          <p className='info-labels'>
             <span className='year-label label'> {year}</span>
             <span className='runtime-label label'>{episode_run_time && episode_run_time.length > 0 ? `${episode_run_time[0]} min` : 'N/A'}</span>
           </p>
+          {genres.length > 0 && (
+            <p className="movie-genres">{limitedGenres.join(" | ")}</p>
+          )}
         </div>
         <div className="image-container">
           <div className="poster-wrapper">
@@ -138,11 +141,10 @@ const TVShowDetailsPage = () => {
               alt={name}
               onError={(e) => (e.target.src = FallbackImage)}
             />
+            <div className="movie-details-overview-hide">
+              <p >{overview}</p>
+            </div>
 
-            {genres.length > 0 && (
-              <p className="movie-genres">{limitedGenres.join(" | ")}</p>
-            )}
-            <p className="movie-details-overview-hide">{overview}</p>
           </div>
           {trailerKey && (
             <iframe
@@ -158,8 +160,8 @@ const TVShowDetailsPage = () => {
       </div>
       <div className="details-content">
         <div className='overview-section'>
-          <h2>Overview</h2>
-          <p>{overview}</p>
+          <h2 className="movie-details-title">Overview</h2>
+          <p className="movie-details-overview">{overview}</p>
         </div>
 
         <h2 className='m-cast-title'>Cast</h2>
@@ -183,6 +185,14 @@ const TVShowDetailsPage = () => {
             </div>
           ))}
         </Slider>
+        {tvShow.backdrop_path ? (
+          <img
+            src={`https://image.tmdb.org/t/p/w1280/${tvShow.backdrop_path}`}
+            alt={tvShow.title}
+          />
+        ) : (
+          <img src={FallbackImage} alt={tvShow.title} />
+        )}
       </div>
     </div>
   );

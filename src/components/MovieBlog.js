@@ -7,6 +7,7 @@ import { Link } from 'react-router-dom';
 const MovieBlog = ({ movies, numberOfMovies }) => {
 
     const limitedMovies = movies.slice(0, numberOfMovies);
+
     const getYearFromDate = (dateString) => {
         return dateString ? new Date(dateString).getFullYear() : '';
     };
@@ -15,7 +16,6 @@ const MovieBlog = ({ movies, numberOfMovies }) => {
         <div className="movie-blog-wrapper">
             <div className="movie-blog">
                 {limitedMovies.map((movie) => {
-
                     return (
                         <div key={movie.id} className={`blog-post`}>
                             <Link to={`/movie/${movie.id}`}>
@@ -38,7 +38,8 @@ const MovieBlog = ({ movies, numberOfMovies }) => {
                                     </span>
                                 </p>
                                 <p className="blog-post-overview">
-                                    {`${movie.overview.slice(0, 200)}...`}
+                                    {`${movie.overview.slice(0, 200)}`}
+                                    {movie.overview.length > 200 && '...'}
                                 </p>
                                 {movie.overview.length > 200 && (
                                     <Link to={`/movie/${movie.id}`} className="read-more-link">

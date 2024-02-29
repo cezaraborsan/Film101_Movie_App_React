@@ -5,7 +5,7 @@ import "../../MoviesPage.css";
 
 import MoviePageBlog from '../MoviePageBlog';
 import MovieTrailersMPage from '../MoviesTrailersMPage';
-import MovieSlider from '../MoviesSlider';  // Import the new MovieSlider component
+import MovieSlider from '../MoviesSlider';
 import Loader from '../Loader';
 
 const MoviesPage = () => {
@@ -68,7 +68,7 @@ const MoviesPage = () => {
             } catch (error) {
                 console.error('Error fetching genres:', error);
             } finally {
-                setLoading(false); // Set loading to false when data is fetched
+                setLoading(false);
             }
         };
 
@@ -101,7 +101,7 @@ const MoviesPage = () => {
         fetchGenreMovies();
     }, [selectedGenreId, apiKey]);
 
-    const maxVisibleGenres = 3;
+    // const maxVisibleGenres = 3;
 
     if (loading) {
         return <Loader />;
@@ -116,25 +116,20 @@ const MoviesPage = () => {
             {/* Genres Section - Dropdown on smaller screens */}
             <div className="genres-section">
                 <div className="genre-list">
-                    {genres.slice(0, maxVisibleGenres).map((genre) => (
-                        <button
-                            key={genre.id}
-                            onClick={() => setSelectedGenreId(genre.id)}
-                            className={`genre-button ${selectedGenreId === genre.id ? 'active' : ''}`}
+                    <div className="select-wrapper">
+                        <select
+                            className="custom-select"
+                            value={selectedGenreId}
+                            onChange={(e) => setSelectedGenreId(parseInt(e.target.value))}
                         >
-                            {genre.name}
-                        </button>
-                    ))}
-                    <select
-                        value={selectedGenreId}
-                        onChange={(e) => setSelectedGenreId(parseInt(e.target.value))}
-                    >
-                        {genres.map((genre) => (
-                            <option key={genre.id} value={genre.id}>
-                                {genre.name}
-                            </option>
-                        ))}
-                    </select>
+                            {genres.map((genre) => (
+                                <option key={genre.id} value={genre.id}>
+                                    {genre.name}
+                                </option>
+                            ))}
+                        </select>
+                        <div className="select-arrow">&#9662;</div>
+                    </div>
                 </div>
             </div>
             <MovieSlider
